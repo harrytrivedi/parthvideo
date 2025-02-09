@@ -1,5 +1,7 @@
 <?php
-session_start(); // Start the session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Only start the session if it is not already started
+}
 
 // Include the database connection file
 include_once '../user/cryptoshow_db.php';

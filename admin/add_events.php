@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $capacity = mysqli_real_escape_string($conn, $_POST['capacity']);
 
     // Handle file upload
-    $targetDirectory = "../user/images/uploads/";
+    $targetDirectory = "../user/images/uploads";
     $targetFile = $targetDirectory . basename($_FILES["eventimage"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));

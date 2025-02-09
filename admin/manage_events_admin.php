@@ -1,6 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Only start session if it's not already started
+}
+
 $pageTitle = "Manage Event - Parth Video";
-include_once 'admin_header.php';
+include_once 'admin_header.php'; // Make sure no output occurs before this line
 
 // Check if eventid is provided
 if (!isset($_GET['eventid'])) {
@@ -34,25 +41,24 @@ if (mysqli_stmt_prepare($stmt, $sql)) {
 <div class="admin-container">
     <h2>Manage Event</h2>
     <form action="../includes/update_event_details.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="eventid" value="<?php echo $eventid; ?>">
+        <input type="hidden" name="eventid" value="<?php echo htmlspecialchars($eventid); ?>">
 
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="<?php echo $event['title']; ?>" required>
+        <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($event['title']); ?>" required>
         <br><br>
 
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" value="<?php echo $event['date']; ?>" required>
+        <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($event['date']); ?>" required>
         <br><br>
 
         <label for="venue">Venue:</label>
-        <input type="text" id="venue" name="venue" value="<?php echo $event['venue']; ?>" required>
+        <input type="text" id="venue" name="venue" value="<?php echo htmlspecialchars($event['venue']); ?>" required>
         <br><br>
 
         <label for="capacity">Capacity:</label>
-        <input type="number" id="capacity" name="capacity" value="<?php echo $event['capacity']; ?>" required>
+        <input type="number" id="capacity" name="capacity" value="<?php echo htmlspecialchars($event['capacity']); ?>" required>
         <br><br>
 
-        <!-- Add this input field to your form for uploading an image -->
         <label for="eventimage">Event Image:</label>
         <input type="file" name="eventimage" id="eventimage">
         <br><br>

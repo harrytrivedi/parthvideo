@@ -1,7 +1,7 @@
 
 <?php
 $pageTitle = "Add Event - Parth Video";
-include_once 'admin_header.php'
+include_once 'admin_header.php';
 
 ?>
 <body>
