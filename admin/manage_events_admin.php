@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Manage Event - Cryptoshow";
+$pageTitle = "Manage Event - Parth Video";
 include_once 'admin_header.php';
 
 // Check if eventid is provided

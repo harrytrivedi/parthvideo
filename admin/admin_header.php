@@ -23,14 +23,13 @@ function isAdmin()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($pageTitle) ? $pageTitle : "Cryptoshow Society"; ?></title>
+    <title><?php echo isset($pageTitle) ? $pageTitle : "Parth Video"; ?></title>
     <link rel="stylesheet" href="../css/stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
     <script src="../js/script.js"> </script>
 
     <style>
-        /* Hide the burger icon by default */
         .burger-icon {
             display: none;
         }
@@ -40,7 +39,6 @@ function isAdmin()
             align-items: center;
         }
 
-        /* Add a media query for smaller devices */
         @media only screen and (max-width: 768px) {
 
             .auth-buttons {
@@ -146,7 +144,7 @@ function isAdmin()
 
     <nav class="navbar">
         <div class="logo">
-            <img src="../user/images/Cryptologo.png" alt="Cryptoshow Logo">
+            <img src="../user/images/headerLogo.png" alt="Parth Video Logo">
         </div>
 
         <!-- Add the burger icon -->

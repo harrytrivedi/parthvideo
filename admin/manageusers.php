@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Manage Users - Cryptoshow Society";
+$pageTitle = "Manage Users - Parth Video";
 include_once 'admin_header.php';
 
 if (!isset($_SESSION['userid'])) {

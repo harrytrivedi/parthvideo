@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "View Events - Cryptoshow Society";
+$pageTitle = "View Events - Parth Video";
 include_once 'admin_header.php'; 
 
 ?>

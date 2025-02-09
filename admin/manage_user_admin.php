@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Manage User - Cryptoshow Society";
+$pageTitle = "Manage User - Parth Video";
 include_once 'admin_header.php';
 
 // Check if userid is set in the URL

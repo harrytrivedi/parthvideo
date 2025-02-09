@@ -1,6 +1,6 @@
 
 <?php
-$pageTitle = "Add Event - Cryptoshow";
+$pageTitle = "Add Event - Parth Video";
 include_once 'admin_header.php'
 
 ?>

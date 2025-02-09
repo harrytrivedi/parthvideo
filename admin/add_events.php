@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $capacity = mysqli_real_escape_string($conn, $_POST['capacity']);
 
     // Handle file upload
-    $targetDirectory = "..//user/images/uploads";
+    $targetDirectory = "../user/images/uploads/";
     $targetFile = $targetDirectory . basename($_FILES["eventimage"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -26,26 +26,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($check !== false) {
         $uploadOk = 1;
     } else {
-        header("location: ..//admin/create_event.php?error=File is not an image.");
+        header("location: ../admin/create_event.php?error=File is not an image.");
         exit();
     }
 
     // Check if file already exists
     if (file_exists($targetFile)) {
-        header("location: ..//admin/create_event.php?error=Sorry, file already exists.");
+        header("location: ../admin/create_event.php?error=Sorry, file already exists.");
         exit();
     }
 
     // Check file size
     if ($_FILES["eventimage"]["size"] > 500000) {
-        header("location: ..//admin/create_event.php?error=Sorry, your file is too large.");
+        header("location: ../admin/create_event.php?error=Sorry, your file is too large.");
         exit();
     }
 
     // Allow only certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
-        header("location: ..//admin/create_event.php?error=Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+        header("location: ../admin/create_event.php?error=Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
         exit();
     }
 
@@ -57,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO events (title, date, venue, capacity, eventimage) VALUES ('$title', '$date', '$venue', '$capacity', '$imagePath')";
         if (mysqli_query($conn, $sql)) {
             // Redirect back to admin panel with success message
-            header("location: ..//admin/admin.php?success=Event added successfully");
+            header("location: ../admin/admin.php?success=Event added successfully");
             exit();
         } else {
             // Redirect back to admin panel with error message
-            header("location: ..//admin/admin.php?error=Error adding event: " . mysqli_error($conn));
+            header("location: ../admin/admin.php?error=Error adding event: " . mysqli_error($conn));
             exit();
         }
     } else {
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // If form is not submitted, redirect to admin panel
-    header("location: ..//admin/admin.php");
+    header("location: ../admin/admin.php");
     exit();
 }
 ?>

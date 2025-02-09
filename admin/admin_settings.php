@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Admin Settings - Cryptoshow";
+$pageTitle = "Admin Settings - Parth Video";
 include_once 'admin_header.php'
 
 ?>
