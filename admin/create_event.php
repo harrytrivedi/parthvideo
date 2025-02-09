@@ -8,7 +8,7 @@ include_once 'admin_header.php'
 
 <div class="admin-container">
     <h2>Add New Event</h2>
-    <form action="..//admin/add_events.php" method="post" enctype="multipart/form-data">
+    <form action="../admin/add_events.php" method="post" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
         <br><br>
