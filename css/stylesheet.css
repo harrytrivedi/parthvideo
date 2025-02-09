@@ -74,7 +74,7 @@ h2 {
     font-weight: bolder;
     font-style: normal;
     font-size: 32px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    background: #5e17eb;; /* Gradient background for text */
     -webkit-background-clip: text; /* Apply the gradient to the text */
     background-clip: text; /* Apply the gradient to the text */
 }
@@ -200,7 +200,7 @@ input[type="submit"] {
     font-size: 25px;
     width: 100%;
     padding: 10px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    background: #5e17eb;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -223,7 +223,7 @@ input[type="submit"]:hover {
     right: 20px; /* Adjust as needed */
     font-size: 18px;
     padding: 10px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Same gradient as the submit button */
+    background: #5e17eb;; /* Same gradient as the submit button */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -245,7 +245,7 @@ input[type="submit"]:hover {
     position: static; /* Change position to static */
     font-size: 18px;
     padding: 10px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Same gradient as the submit button */
+    background: #5e17eb;; /* Same gradient as the submit button */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -356,7 +356,7 @@ a:hover {
     padding: 5px 10px;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     border-radius: 5px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    background: #5e17eb;; /* Blue submit button */
     position: relative;
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
@@ -414,7 +414,7 @@ a:hover {
 }
 
 .cta-button {
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    background: #5e17eb;; /* Blue submit button */
     color: #ffffff;
     font-weight: bold;
     padding: 15px 30px;
@@ -519,7 +519,7 @@ a:hover {
     font-weight: bolder;
     font-style: normal;
     font-size: 32px;
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    background: #5e17eb;; /* Gradient background for text */
     background-clip: text; /* Apply the gradient to the text */
 }
 
@@ -529,7 +529,7 @@ a:hover {
     display: flex; /* Change display property to flex */
     justify-content: center; /* Center the button horizontally */
     align-items: center; /* Center the button vertically */
-    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    background: #5e17eb;; /* Gradient background for text */
     margin: auto;
     color: #fff;
     border: none;

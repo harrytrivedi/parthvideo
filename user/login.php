@@ -120,7 +120,7 @@
         </div>
         <div class="welcome-container">
             <img class="logo_reglo" src="../user/images/logo-dark.png" alt="Parth Video Logo">
-            <h3>Welcome to Parth Video!</h3>
+            <h3></h3>
         </div>
     </div>
     <script src="../js/script.js"></script>
