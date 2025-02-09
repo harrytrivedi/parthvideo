@@ -212,8 +212,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
-    color: black;
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
+    color:black;
 }
 
 /* Night mode button */
@@ -236,8 +236,8 @@ input[type="submit"]:hover {
 }
 /* Hover effect for night mode button */
 .night-mode-button:hover {
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff); /* Same hover effect as the submit button */
-    color: black;
+    background: white; 
+    color: #5e17eb;
 }
 
 /* Night mode button */
@@ -254,13 +254,13 @@ input[type="submit"]:hover {
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
-    margin-bottom: 20px; /* Add margin bottom to create space between button and form */
+    margin-bottom: 20px; 
 }
 
 /* Hover effect for night mode button */
 .night-mode-buttonprof:hover {
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff); /* Same hover effect as the submit button */
-    color: black;
+    background: white; 
+    color: #5e17eb;
 }
 
 
@@ -338,7 +338,7 @@ a:hover {
 }
 
 .nav-links a:hover {
-    color: #c400ff; /* Change color on hover */
+    color: #5e17eb; /* Change color on hover */
 }
 
 .auth-buttons {
@@ -365,7 +365,7 @@ a:hover {
 }
 
 .auth-buttons a:hover {
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
     color: black;
 }
 
@@ -438,7 +438,7 @@ a:hover {
 
 .cta-button:hover {
     text-decoration: none;
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
     color: black;
 }
 
@@ -556,7 +556,7 @@ a:hover {
 }
 
 .event-card button:hover {
-    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
     color: black;
 }
 
