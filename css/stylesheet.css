@@ -263,6 +263,7 @@ input[type="submit"]:hover {
     color: black;
 }
 
+
 p {
     text-align: center;
     margin-top: 15px;
@@ -273,7 +274,7 @@ p {
 }
 
 a {
-    color: white; 
+    color: #5e17eb; 
     text-decoration: none;
 }
 
@@ -294,12 +295,12 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    transition: top 0.3s ease; /* Add transition for smooth hiding/showing */
+    transition: top 0.3s ease; 
 }
 
 .logo img {
     display: flex;
-    max-width: 280px; /* Adjust logo size as needed */
+    max-width: 67px;
 }
 
 .nav-links {
@@ -385,7 +386,7 @@ a:hover {
 }
 
 .hero-section-img {
-    background-image: url('..//user/images/un1.jpg'); /* Replace 'your-background-image.jpg' with the path to your actual background image */
+    background-image: url('../user/images/back-main.jpeg'); 
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -403,6 +404,15 @@ a:hover {
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
+}
+
+.hero-section span {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    color: #5e17eb;
 }
 
 .hero-section p {

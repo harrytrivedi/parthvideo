@@ -21,7 +21,7 @@ function isAdmin()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($pageTitle) ? $pageTitle : "Cryptoshow Society"; ?></title>
+    <title><?php echo isset($pageTitle) ? $pageTitle : "Parth Video"; ?></title>
     <link rel="stylesheet" href="..//css/stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
@@ -144,7 +144,7 @@ function isAdmin()
 
     <nav class="navbar">
         <div class="logo">
-            <img src="../user/images/Cryptologo.png" alt="Cryptoshow Logo">
+            <img src="../user/images/headerLogo.png" alt="Parth Video Logo">
         </div>
 
         <!-- Add the burger icon -->
@@ -156,10 +156,10 @@ function isAdmin()
         <ul class="nav-links">
             <li><a href="../user/home.php">Home</a></li>
             <li><a href="../user/aboutus.php">About Us</a></li>
-            <li><a href="../user/events.php">Events</a></li>
+            <li><a href="../user/events.php">Services</a></li>
             <?php if (isLoggedIn()) { ?>
-                <li><a href="../user/members.php">Members</a></li>
-                <li><a href="../user/devices.php">Devices</a></li>
+                <li><a href="../user/members.php">Projects</a></li>
+                <li><a href="../user/devices.php">Clients</a></li>
             <?php } ?>
         </ul>
 
