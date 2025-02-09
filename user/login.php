@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Cryptoshow Society</title>
-    <link rel="stylesheet" href="..//css/stylesheet.css">
+    <title>Login - Parth Video</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
     <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
     <script>
         // Function to toggle password visibility
@@ -82,7 +82,7 @@
                     $_SESSION['avatar'] = $row_user['avatar'];
 
                     // Redirect to home page
-                    header("location: home.php");
+                    header("location: index.php");
                     exit(); // Make sure to exit after redirection
                 }
 
@@ -119,11 +119,11 @@
             <p>Don't have an account? <a href="registration.php">Register here</a>.</p>
         </div>
         <div class="welcome-container">
-            <img class="logo_reglo" src="..//user/images/Cryptologo.png" alt="Cryptoshow Logo">
-            <h3>Welcome to Cryptoshow Society!</h3>
+            <img class="logo_reglo" src="../user/images/logo-dark.png" alt="Parth Video Logo">
+            <h3>Welcome to Parth Video!</h3>
         </div>
     </div>
-    <script src="..//js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>

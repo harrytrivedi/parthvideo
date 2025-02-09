@@ -20,7 +20,7 @@ modeToggleBtn.addEventListener('click', function() {
 
         // Change logo to white mode logo
         const logoImg = document.querySelector('.logo_reglo');
-        logoImg.src = '../user/images/Cryptologowhite.png';
+        logoImg.src = '../user/images/logo-white.png';
     } else {
         // Change background color of all containers to default color (black)
         containers.forEach(container => {
@@ -29,7 +29,7 @@ modeToggleBtn.addEventListener('click', function() {
 
         // Change logo to default logo
         const logoImg = document.querySelector('.logo_reglo');
-        logoImg.src = '../user/images/Cryptologo.png';
+        logoImg.src = '../user/images/logo-dark.png';
     }
 });
 

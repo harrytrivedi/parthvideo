@@ -1,6 +1,6 @@
 <?php
-$pageTitle = "Homepage - Cryptoshow Society";
-include_once '..//includes/header.php';
+$pageTitle = "Homepage - Parth Video";
+include_once '../includes/header.php';
 ?>
 
 <div class="hero-section">
@@ -14,7 +14,7 @@ include_once '..//includes/header.php';
 
 <!-- Other sections of the homepage -->
 
-<script src="..//js/script.js"></script>
+<script src="../js/script.js"></script>
 </body>
 
 </html>

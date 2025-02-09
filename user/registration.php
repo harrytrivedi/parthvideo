@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Cryptoshow Society</title>
+    <title>Register - Parth Video</title>
     <link rel="stylesheet" href="../css/stylesheet.css">
     <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
 </head>
@@ -110,11 +110,11 @@
         </div>
         <div class="welcome-container">
             <!-- Add your logo and welcome text here -->
-            <img class="logo_reglo" src="..//user/images/Cryptologo.png" alt="Cryptoshow Logo">
-            <h3>Welcome to Cryptoshow Society!</h3>
+            <img class="logo_reglo" src="../user/images/Cryptologo.png" alt="Parth Video Logo">
+            <h3>Welcome to Parth Video!</h3>
         </div>
     </div>
-    <script src="..//js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
