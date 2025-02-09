@@ -1,0 +1,568 @@
+/* styles.css */
+
+/* Common styles */
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+    /* background-image: url('..//user/images/log1.jpg');  */
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff; /* Default text color */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+
+body.night-mode {
+    background-color: black;
+    color: #ffffff;
+}
+
+/* Day mode styles */
+body.day-mode {
+    background-color: white;
+    color: #000000; /* Change text color for better visibility */
+}
+
+.form-container {
+    width: 60%;
+    margin-right: 20px;
+}
+
+/* Specific styles for night mode */
+body.night-mode label,
+body.night-mode h3 {
+    color: rgba(209, 209, 208, 0.801); /* Adjust text color for night mode */
+}
+
+/* Specific styles for day mode */
+body.day-mode label,
+body.day-mode h3 {
+    color: black; /* Adjust text color for day mode */
+}
+
+/* .night-mode {
+    background-color: #222; /* Dark background color */
+    /* color: #fff; Light text color */
+/* }  */
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 10;
+    font-style: normal;
+    
+}
+
+h2 {
+    display: flex;
+    color: transparent; /* Hide the original text color */
+    margin-bottom: 20px; /* Add space below heading */
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 32px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    -webkit-background-clip: text; /* Apply the gradient to the text */
+    background-clip: text; /* Apply the gradient to the text */
+}
+
+
+
+.logo_reglo {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    overflow-clip-margin: content-box;
+}
+
+.logo_reglo img {
+    max-width: 100%; /* Ensure the logo does not exceed its container's width */
+    height: auto; /* Maintain aspect ratio */
+}
+.dropdown{
+    display: flex;
+}
+.container {
+    width: 80%;
+    padding: 30px;
+    border-radius: 10px;
+    /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
+    margin: auto; /* Center horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease; /* Add transition for opacity */
+    opacity: 1; /* Ensure the default opacity is 1 */
+}
+.mybookings_container{
+    display: flex;
+    width: 80%;
+    padding: 30px;
+    border-radius: 10px;
+    /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
+    margin: auto; /* Center horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease; /* Add transition for opacity */
+    opacity: 1; /* Ensure the default opacity is 1 */
+}
+.my-account-container{
+    width: 80%;
+    padding: 80px;
+    border-radius: 10px;
+    /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
+    margin: auto; /* Center horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease; /* Add transition for opacity */
+    opacity: 1; /* Ensure the default opacity is 1 */
+}
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically on smaller devices */
+        padding-top: 50px; /* Increase top padding */
+        padding-bottom: 50px; /* Increase bottom padding */
+    }
+
+    .form-container,
+    .welcome-container {
+        width: 80%; /* Adjust container width for better responsiveness */
+        margin: 0 auto; /* Center containers horizontally */
+        margin-bottom: 20px; /* Add bottom margin */
+    }
+
+    .logo_reglo {
+        max-width: 100%; /* Ensure the logo fits within its container */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .my-account-container {
+        flex-direction: column; /* Stack items vertically on smaller devices */
+        padding-top: 50px; /* Increase top padding */
+        padding-bottom: 50px; /* Increase bottom padding */
+    }
+
+    .form-container,
+    .welcome-container {
+        width: 80%; /* Adjust container width for better responsiveness */
+        margin: 0 auto; /* Center containers horizontally */
+        margin-bottom: 20px; /* Add bottom margin */
+    }
+
+    .logo_reglo {
+        max-width: 100%; /* Ensure the logo fits within its container */
+    }
+}
+
+label {
+    color: rgba(209, 209, 208, 0.801);
+    font-family: "Averia Serif Libre", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px; /* Reduce padding */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase font size */
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+input[type="submit"] {
+    font-size: 25px;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    color: black;
+}
+
+/* Night mode button */
+.night-mode-button {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    font-size: 18px;
+    padding: 10px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Same gradient as the submit button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+
+}
+/* Hover effect for night mode button */
+.night-mode-button:hover {
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff); /* Same hover effect as the submit button */
+    color: black;
+}
+
+/* Night mode button */
+.night-mode-buttonprof {
+    position: static; /* Change position to static */
+    font-size: 18px;
+    padding: 10px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Same gradient as the submit button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    margin-bottom: 20px; /* Add margin bottom to create space between button and form */
+}
+
+/* Hover effect for night mode button */
+.night-mode-buttonprof:hover {
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff); /* Same hover effect as the submit button */
+    color: black;
+}
+
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+}
+
+a {
+    color: white; 
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: top 0.3s ease; /* Add transition for smooth hiding/showing */
+}
+
+.logo img {
+    display: flex;
+    max-width: 280px; /* Adjust logo size as needed */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Wrap navigation items to next line if needed */
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.nav-links li {
+    display: flex;
+    margin-right: 20px;
+}
+
+.nav-links li:last-child {
+    display: flex;
+    margin-right: 0;
+}
+
+.nav-links a {
+    display: flex;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 5px;
+    position: relative;
+    transition: color 0.3s ease;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.nav-links a:hover {
+    color: #c400ff; /* Change color on hover */
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; /* Center the login and register buttons vertically */
+}
+
+.auth-buttons a {
+    display: flex;
+    margin-right: 37px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.auth-buttons a:hover {
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    color: black;
+}
+
+/* Hero section styles */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 100px 20px;
+    text-align: center;
+}
+.container1{
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero-section-img {
+    background-image: url('..//user/images/un1.jpg'); /* Replace 'your-background-image.jpg' with the path to your actual background image */
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure the background is behind other content */
+    opacity: 0.5; /* Adjust the opacity as needed */
+}
+
+.hero-section h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.hero-section p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.cta-button {
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Blue submit button */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.cta-button:hover {
+    text-decoration: none;
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    color: black;
+}
+
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start; /* Align navigation items to the start */
+    }
+
+    .nav-links li {
+        margin-right: 0;
+        margin-bottom: 10px; /* Add space between navigation items */
+    }
+
+    .auth-buttons {
+        margin-top: 20px; /* Add space between navigation items and auth buttons */
+    }
+}
+/* Events Card */
+/* Button Hover Effect */
+.event-card button:hover {
+    background-color: #0af8ff;
+    transition: background-color 0.3s ease;
+}
+
+/* Event Cards Grid Layout */
+/* Button Hover Effect */
+.event-card button:hover {
+    background-color: #0af8ff;
+    color: black; /* Adjust text color */
+    transition: background-color 0.3s ease;
+}
+
+/* Event Cards Grid Layout */
+/* Button Hover Effect */
+.event-card button:hover {
+    background-color: #0af8ff;
+    color: black; /* Adjust text color */
+    transition: background-color 0.3s ease;
+}
+
+/* Event Cards Grid Layout */
+.event-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column size based on available space */
+    gap: 20px;
+    justify-content: center;
+    padding: 150px;
+}
+
+.event-card {
+    background-color: black; /* Change background color to black */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%; /* Ensure each card takes full width */
+    border: 2px solid white; /* Add white border */
+    transition: border-color 0.3s ease; /* Add transition for border color change */
+}
+
+.event-card:hover {
+    border-color: transparent; /* Hide border on hover */
+}
+
+/* Ensure image fills card and maintains aspect ratio */
+.event-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Adjust text alignment and spacing */
+.event-card p {
+    margin: 10px;
+    color: white; /* Change text color to white */
+    text-align: center; /* Center-align paragraph */
+}
+
+/* Center-align h2 */
+.event-card h2 {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    color: transparent; /* Change text color to white */
+    text-align: center; /* Center-align h2 */
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 32px;
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    background-clip: text; /* Apply the gradient to the text */
+}
+
+/* Button Styling */
+/* Button Styling */
+.event-card button {
+    display: flex; /* Change display property to flex */
+    justify-content: center; /* Center the button horizontally */
+    align-items: center; /* Center the button vertically */
+    background: linear-gradient(to right, #c400ff, #5ecfff, #0af8ff); /* Gradient background for text */
+    margin: auto;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Add margin-top to create space between button and text */
+    margin-bottom: 20px; /* Add margin-bottom for space between button and border */
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.event-card button:hover {
+    background: linear-gradient(to right, #0af8ff, #5ecfff, #c400ff);
+    color: black;
+}
+
+
+/* Adjust styles for events.php body */
+body.events-body {
+    /* Add any specific styles for the body of events.php here */
+    display: initial; /* Reset display property to default */
+}
+
+/* Adjust event cards layout */
+body.events-body .event-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 150px;
+}
+

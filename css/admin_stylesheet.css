@@ -1,0 +1,167 @@
+/* CSS for Admin Panel */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-container form {
+    text-align: center;
+}
+
+.admin-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.admin-container input[type="text"],
+.admin-container input[type="date"],
+.admin-container input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.admin-container input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.admin-container input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Error and success messages */
+.error-message {
+    color: #ff0000;
+    margin-bottom: 10px;
+}
+
+.success-message {
+    color: #008000;
+    margin-bottom: 10px;
+}
+/* adminsheet */
+.auth-buttons a {
+    display: flex;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    /* font-size: inherit;
+    font-weight: inherit; */
+    transition: all 0.3s ease;
+}
+
+.auth-buttons .profile-icon {
+    display: flex;
+    margin-right: 5px;
+}
+
+/* Dropdown content styles */
+
+.dropdown-content a:first-child {
+    margin-bottom: 5px;
+    /* Add margin below "My Account" */
+}
+
+.dropdown-content {
+    position: absolute;
+    /*can make relative to look cooler */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Set background color */
+    border-radius: 5px;
+    padding: 5px 0;
+    z-index: 1;
+    display: none;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    /* Set text color */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Change background color on hover */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Add styles for admin options */
+.admin-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.admin-option {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    background-color: #f0f0f0; /* Add your desired background color */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.admin-option:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.admin-option a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-option .icon {
+    background-color: black; /* Set the default background color to black */
+}
+
+.admin-option .icon img {
+    width: 100%; /* Ensure the icon fills its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.admin-option .text {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
