@@ -87,7 +87,7 @@ include_once 'admin_header.php';
                     echo "<td>" . $row['title'] . "</td>";
                     echo "<td>" . $row['venue'] . "</td>";
                     echo "<td>" . $row['capacity'] . "</td>";
-                    echo "<td><a href='manage_events_admin.php'?eventid=" . $row['eventid'] . "'>Manage</a></td>";
+                    echo "<td><a href='manage_events_admin.php?eventid=" . $row['eventid'] . "'>Manage</a></td>";
                     echo "</tr>";
                 }
             } else {
