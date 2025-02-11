@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Add Team Member - Parth Video";
+$pageTitle = "Add Member - Parth Video";
 include_once 'admin_header.php';
 ?>
 
