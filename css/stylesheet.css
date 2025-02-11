@@ -458,28 +458,6 @@ a:hover {
         margin-top: 20px; /* Add space between navigation items and auth buttons */
     }
 }
-/* Events Card */
-/* Button Hover Effect */
-.event-card button:hover {
-    background-color: #0af8ff;
-    transition: background-color 0.3s ease;
-}
-
-/* Event Cards Grid Layout */
-/* Button Hover Effect */
-.event-card button:hover {
-    background-color: #0af8ff;
-    color: black; /* Adjust text color */
-    transition: background-color 0.3s ease;
-}
-
-/* Event Cards Grid Layout */
-/* Button Hover Effect */
-.event-card button:hover {
-    background-color: #0af8ff;
-    color: black; /* Adjust text color */
-    transition: background-color 0.3s ease;
-}
 
 /* Event Cards Grid Layout */
 .event-cards {
@@ -501,7 +479,7 @@ a:hover {
 }
 
 .event-card:hover {
-    border-color: transparent; /* Hide border on hover */
+    border-color: #5e17eb; /* Hide border on hover */
 }
 
 /* Ensure image fills card and maintains aspect ratio */
@@ -514,6 +492,10 @@ a:hover {
 /* Adjust text alignment and spacing */
 .event-card p {
     margin: 10px;
+    color: white; /* Change text color to white */
+    text-align: center; /* Center-align paragraph */
+}
+.event-card a {
     color: white; /* Change text color to white */
     text-align: center; /* Center-align paragraph */
 }
@@ -557,7 +539,11 @@ a:hover {
 
 .event-card button:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color: black;
+    color: rgb(0, 0, 0);
+}
+
+.event-card a:hover {
+    color: rgb(0, 0, 0);
 }
 
 
