@@ -30,7 +30,7 @@
       <div class="footer-section footer-contact">
         <h2>Contact Us</h2>
         <p>Email: <a href="mailto:info@parthvideo.com">info@parthvideo.com <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
-        <p>Phone: (123) 456-7890</p>
+        <p>Phone: +91 787446 7874</p>
       </div>
     </div>
 
