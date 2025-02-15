@@ -1,8 +1,13 @@
-# Use the official PHP image with Apache
 FROM php:8.2-apache
 
-# Copy your project files to the web root
-COPY . /var/www/html/
+# Set the working directory
+WORKDIR /var/www/html
 
-# (Optional) Expose port 80 – Render automatically maps this
+# Copy composer files and install dependencies (if applicable)
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --prefer-dist
+
+# Copy the rest of the application code
+COPY . .
+
 EXPOSE 80
