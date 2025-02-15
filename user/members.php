@@ -114,3 +114,4 @@ if (!isset($_SESSION['userid'])) {
         </tbody>
     </table>
 </div>
+<?php include_once '../includes/footer.php'; ?>

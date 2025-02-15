@@ -106,3 +106,4 @@ if (!isset($_SESSION['userid'])) {
         <a href="manage_devices_panel.php" class="button">Manage Devices</a>
     </div>
 </div>
+<?php include_once '../includes/footer.php'; ?>

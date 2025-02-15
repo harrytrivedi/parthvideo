@@ -13,6 +13,7 @@ include_once '../includes/header.php';
 </div>
 
 <!-- Other sections of the homepage -->
+<?php include_once '../includes/footer.php'; ?>
 
 <script src="../js/script.js"></script>
 </body>

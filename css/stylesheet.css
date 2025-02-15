@@ -4,15 +4,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
-    display: flex;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Modern font stack */
     /* background-image: url('..//user/images/log1.jpg');  */
     background-color: black;
     background-size: cover;
     background-position: center;
-    color: #ffffff; /* Default text color */
+    color: #ffffff;
+    /* Default text color */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -27,7 +28,8 @@ body.night-mode {
 /* Day mode styles */
 body.day-mode {
     background-color: white;
-    color: #000000; /* Change text color for better visibility */
+    color: #000000;
+    /* Change text color for better visibility */
 }
 
 .form-container {
@@ -38,18 +40,20 @@ body.day-mode {
 /* Specific styles for night mode */
 body.night-mode label,
 body.night-mode h3 {
-    color: rgba(209, 209, 208, 0.801); /* Adjust text color for night mode */
+    color: rgba(209, 209, 208, 0.801);
+    /* Adjust text color for night mode */
 }
 
 /* Specific styles for day mode */
 body.day-mode label,
 body.day-mode h3 {
-    color: black; /* Adjust text color for day mode */
+    color: black;
+    /* Adjust text color for day mode */
 }
 
 /* .night-mode {
     background-color: #222; /* Dark background color */
-    /* color: #fff; Light text color */
+/* color: #fff; Light text color */
 /* }  */
 
 .welcome-container {
@@ -62,21 +66,27 @@ body.day-mode h3 {
     font-family: "Poppins", sans-serif;
     font-weight: 10;
     font-style: normal;
-    
+
 }
 
 h2 {
     display: flex;
-    color: transparent; /* Hide the original text color */
-    margin-bottom: 20px; /* Add space below heading */
+    color: transparent;
+    /* Hide the original text color */
+    margin-bottom: 20px;
+    /* Add space below heading */
     align-items: center;
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
     font-size: 32px;
-    background: #5e17eb;; /* Gradient background for text */
-    -webkit-background-clip: text; /* Apply the gradient to the text */
-    background-clip: text; /* Apply the gradient to the text */
+    background: #5e17eb;
+    ;
+    /* Gradient background for text */
+    -webkit-background-clip: text;
+    /* Apply the gradient to the text */
+    background-clip: text;
+    /* Apply the gradient to the text */
 }
 
 
@@ -89,85 +99,115 @@ h2 {
 }
 
 .logo_reglo img {
-    max-width: 100%; /* Ensure the logo does not exceed its container's width */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 100%;
+    /* Ensure the logo does not exceed its container's width */
+    height: auto;
+    /* Maintain aspect ratio */
 }
-.dropdown{
+
+.dropdown {
     display: flex;
 }
+
 .container {
     width: 80%;
     padding: 30px;
     border-radius: 10px;
     /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
-    margin: auto; /* Center horizontally */
+    margin: auto;
+    /* Center horizontally */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease; /* Add transition for opacity */
-    opacity: 1; /* Ensure the default opacity is 1 */
+    transition: opacity 0.5s ease;
+    /* Add transition for opacity */
+    opacity: 1;
+    /* Ensure the default opacity is 1 */
 }
-.mybookings_container{
+
+.mybookings_container {
     display: flex;
     width: 80%;
     padding: 30px;
     border-radius: 10px;
     /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
-    margin: auto; /* Center horizontally */
+    margin: auto;
+    /* Center horizontally */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease; /* Add transition for opacity */
-    opacity: 1; /* Ensure the default opacity is 1 */
+    transition: opacity 0.5s ease;
+    /* Add transition for opacity */
+    opacity: 1;
+    /* Ensure the default opacity is 1 */
 }
-.my-account-container{
+
+.my-account-container {
     width: 80%;
     padding: 80px;
     border-radius: 10px;
     /* box-shadow: 0 0 20px rgba(255, 255, 255, 0.466); Drop shadow effect */
-    margin: auto; /* Center horizontally */
+    margin: auto;
+    /* Center horizontally */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease; /* Add transition for opacity */
-    opacity: 1; /* Ensure the default opacity is 1 */
+    transition: opacity 0.5s ease;
+    /* Add transition for opacity */
+    opacity: 1;
+    /* Ensure the default opacity is 1 */
 }
+
 /* Media query for smaller devices */
 @media screen and (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack items vertically on smaller devices */
-        padding-top: 50px; /* Increase top padding */
-        padding-bottom: 50px; /* Increase bottom padding */
+        flex-direction: column;
+        /* Stack items vertically on smaller devices */
+        padding-top: 50px;
+        /* Increase top padding */
+        padding-bottom: 50px;
+        /* Increase bottom padding */
     }
 
     .form-container,
     .welcome-container {
-        width: 80%; /* Adjust container width for better responsiveness */
-        margin: 0 auto; /* Center containers horizontally */
-        margin-bottom: 20px; /* Add bottom margin */
+        width: 80%;
+        /* Adjust container width for better responsiveness */
+        margin: 0 auto;
+        /* Center containers horizontally */
+        margin-bottom: 20px;
+        /* Add bottom margin */
     }
 
     .logo_reglo {
-        max-width: 100%; /* Ensure the logo fits within its container */
+        max-width: 100%;
+        /* Ensure the logo fits within its container */
     }
 }
 
 @media screen and (max-width: 768px) {
     .my-account-container {
-        flex-direction: column; /* Stack items vertically on smaller devices */
-        padding-top: 50px; /* Increase top padding */
-        padding-bottom: 50px; /* Increase bottom padding */
+        flex-direction: column;
+        /* Stack items vertically on smaller devices */
+        padding-top: 50px;
+        /* Increase top padding */
+        padding-bottom: 50px;
+        /* Increase bottom padding */
     }
 
     .form-container,
     .welcome-container {
-        width: 80%; /* Adjust container width for better responsiveness */
-        margin: 0 auto; /* Center containers horizontally */
-        margin-bottom: 20px; /* Add bottom margin */
+        width: 80%;
+        /* Adjust container width for better responsiveness */
+        margin: 0 auto;
+        /* Center containers horizontally */
+        margin-bottom: 20px;
+        /* Add bottom margin */
     }
 
     .logo_reglo {
-        max-width: 100%; /* Ensure the logo fits within its container */
+        max-width: 100%;
+        /* Ensure the logo fits within its container */
     }
 }
 
@@ -186,11 +226,13 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
-    padding: 8px; /* Reduce padding */
+    padding: 8px;
+    /* Reduce padding */
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px; /* Increase font size */
+    font-size: 16px;
+    /* Increase font size */
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -213,17 +255,21 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color:black;
+    color: black;
 }
 
 /* Night mode button */
 .night-mode-button {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
+    top: 20px;
+    /* Adjust as needed */
+    right: 20px;
+    /* Adjust as needed */
     font-size: 18px;
     padding: 10px;
-    background: #5e17eb;; /* Same gradient as the submit button */
+    background: #5e17eb;
+    ;
+    /* Same gradient as the submit button */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -234,18 +280,22 @@ input[type="submit"]:hover {
     font-style: normal;
 
 }
+
 /* Hover effect for night mode button */
 .night-mode-button:hover {
-    background: white; 
+    background: white;
     color: #5e17eb;
 }
 
 /* Night mode button */
 .night-mode-buttonprof {
-    position: static; /* Change position to static */
+    position: static;
+    /* Change position to static */
     font-size: 18px;
     padding: 10px;
-    background: #5e17eb;; /* Same gradient as the submit button */
+    background: #5e17eb;
+    ;
+    /* Same gradient as the submit button */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -254,12 +304,12 @@ input[type="submit"]:hover {
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 /* Hover effect for night mode button */
 .night-mode-buttonprof:hover {
-    background: white; 
+    background: white;
     color: #5e17eb;
 }
 
@@ -274,7 +324,7 @@ p {
 }
 
 a {
-    color: #5e17eb; 
+    color: #5e17eb;
     text-decoration: none;
 }
 
@@ -295,7 +345,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    transition: top 0.3s ease; 
+    transition: top 0.3s ease;
 }
 
 .logo img {
@@ -309,7 +359,8 @@ a:hover {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* Wrap navigation items to next line if needed */
+    flex-wrap: wrap;
+    /* Wrap navigation items to next line if needed */
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
@@ -338,13 +389,15 @@ a:hover {
 }
 
 .nav-links a:hover {
-    color: #5e17eb; /* Change color on hover */
+    color: #5e17eb;
+    /* Change color on hover */
 }
 
 .auth-buttons {
     display: flex;
     justify-content: space-evenly;
-    align-items: center; /* Center the login and register buttons vertically */
+    align-items: center;
+    /* Center the login and register buttons vertically */
 }
 
 .auth-buttons a {
@@ -357,7 +410,9 @@ a:hover {
     padding: 5px 10px;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     border-radius: 5px;
-    background: #5e17eb;; /* Blue submit button */
+    background: #5e17eb;
+    ;
+    /* Blue submit button */
     position: relative;
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
@@ -377,7 +432,8 @@ a:hover {
     padding: 100px 20px;
     text-align: center;
 }
-.container1{
+
+.container1 {
     background-size: cover;
     background-position: center;
     color: #ffffff;
@@ -386,7 +442,7 @@ a:hover {
 }
 
 .hero-section-img {
-    background-image: url('../user/images/back-main.jpeg'); 
+    background-image: url('../user/images/back-main.jpeg');
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -394,8 +450,10 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ensure the background is behind other content */
-    opacity: 0.5; /* Adjust the opacity as needed */
+    z-index: -1;
+    /* Ensure the background is behind other content */
+    opacity: 0.5;
+    /* Adjust the opacity as needed */
 }
 
 .hero-section h1 {
@@ -424,7 +482,9 @@ a:hover {
 }
 
 .cta-button {
-    background: #5e17eb;; /* Blue submit button */
+    background: #5e17eb;
+    ;
+    /* Blue submit button */
     color: #ffffff;
     font-weight: bold;
     padding: 15px 30px;
@@ -446,40 +506,49 @@ a:hover {
 @media screen and (max-width: 768px) {
     .nav-links {
         flex-direction: column;
-        align-items: flex-start; /* Align navigation items to the start */
+        align-items: flex-start;
+        /* Align navigation items to the start */
     }
 
     .nav-links li {
         margin-right: 0;
-        margin-bottom: 10px; /* Add space between navigation items */
+        margin-bottom: 10px;
+        /* Add space between navigation items */
     }
 
     .auth-buttons {
-        margin-top: 20px; /* Add space between navigation items and auth buttons */
+        margin-top: 20px;
+        /* Add space between navigation items and auth buttons */
     }
 }
 
 /* Event Cards Grid Layout */
 .event-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust column size based on available space */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Adjust column size based on available space */
     gap: 20px;
     justify-content: center;
     padding: 150px;
 }
 
 .event-card {
-    background-color: black; /* Change background color to black */
+    background-color: black;
+    /* Change background color to black */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 100%; /* Ensure each card takes full width */
-    border: 2px solid white; /* Add white border */
-    transition: border-color 0.3s ease; /* Add transition for border color change */
+    width: 100%;
+    /* Ensure each card takes full width */
+    border: 2px solid white;
+    /* Add white border */
+    transition: border-color 0.3s ease;
+    /* Add transition for border color change */
 }
 
 .event-card:hover {
-    border-color: #5e17eb; /* Hide border on hover */
+    border-color: #5e17eb;
+    /* Hide border on hover */
 }
 
 /* Ensure image fills card and maintains aspect ratio */
@@ -492,12 +561,17 @@ a:hover {
 /* Adjust text alignment and spacing */
 .event-card p {
     margin: 10px;
-    color: white; /* Change text color to white */
-    text-align: center; /* Center-align paragraph */
+    color: white;
+    /* Change text color to white */
+    text-align: center;
+    /* Center-align paragraph */
 }
+
 .event-card a {
-    color: white; /* Change text color to white */
-    text-align: center; /* Center-align paragraph */
+    color: white;
+    /* Change text color to white */
+    text-align: center;
+    /* Center-align paragraph */
 }
 
 /* Center-align h2 */
@@ -505,31 +579,43 @@ a:hover {
     display: flex;
     justify-content: center;
     margin: 10px;
-    color: transparent; /* Change text color to white */
-    text-align: center; /* Center-align h2 */
+    color: transparent;
+    /* Change text color to white */
+    text-align: center;
+    /* Center-align h2 */
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     font-style: normal;
     font-size: 32px;
-    background: #5e17eb;; /* Gradient background for text */
-    background-clip: text; /* Apply the gradient to the text */
+    background: #5e17eb;
+    ;
+    /* Gradient background for text */
+    background-clip: text;
+    /* Apply the gradient to the text */
 }
 
 /* Button Styling */
 /* Button Styling */
 .event-card button {
-    display: flex; /* Change display property to flex */
-    justify-content: center; /* Center the button horizontally */
-    align-items: center; /* Center the button vertically */
-    background: #5e17eb;; /* Gradient background for text */
+    display: flex;
+    /* Change display property to flex */
+    justify-content: center;
+    /* Center the button horizontally */
+    align-items: center;
+    /* Center the button vertically */
+    background: #5e17eb;
+    ;
+    /* Gradient background for text */
     margin: auto;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px; /* Add margin-top to create space between button and text */
-    margin-bottom: 20px; /* Add margin-bottom for space between button and border */
+    margin-top: 20px;
+    /* Add margin-top to create space between button and text */
+    margin-bottom: 20px;
+    /* Add margin-bottom for space between button and border */
     font-size: 20px;
     transition: background-color 0.3s ease;
     font-family: "Poppins", sans-serif;
@@ -550,7 +636,8 @@ a:hover {
 /* Adjust styles for events.php body */
 body.events-body {
     /* Add any specific styles for the body of events.php here */
-    display: initial; /* Reset display property to default */
+    display: initial;
+    /* Reset display property to default */
 }
 
 /* Adjust event cards layout */
@@ -562,3 +649,187 @@ body.events-body .event-cards {
     padding: 150px;
 }
 
+/* =========================
+   Footer Styles
+   ========================= */
+.footer {
+    background-color: black;
+    color: #ffffff;
+    /* Minimal vertical padding to reduce black space */
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    /* Wrap on smaller screens */
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Top-align all columns */
+    margin-bottom: 10px;
+    /* Small gap above footer-bottom */
+}
+
+/* Left Column: Quick Links */
+.footer-links {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-links h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    /* Optional gradient text style */
+    background: #5e17eb;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 5px 0;
+}
+
+.footer-links ul li a {
+    color: #ffffff;
+    transition: color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-links ul li a:hover {
+    color: #5e17eb;
+}
+
+/* Center Column: Logo */
+.footer-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: flex-start;
+    /* Top align with headings */
+    margin: 0 10px;
+}
+
+.footer-logo img {
+    max-width: 180px;
+    /* Adjust as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Right Column: Contact Us (centered text) */
+.footer-contact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center the heading and paragraphs horizontally */
+    margin: 0 10px;
+}
+
+.footer-section h2 {
+    /* Keep or remove these lines if you want gradient text: */
+    background: #5e17eb;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    display: inline-block;
+    /* So the heading shrinks to text width */
+    border-bottom: 2px solid #5e17eb;
+    /* Underline color & thickness */
+    margin-bottom: 8px;
+    /* Space below heading */
+    font-size: 18px;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.footer-contact a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.footer-contact a:hover {
+    color: #5e17eb;
+}
+
+/* Bottom Row */
+.footer-bottom {
+    border-top: 1px solid #5e17eb;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.footer-social {
+    margin-bottom: 8px;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin: 0 8px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #5e17eb;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section,
+    .footer-logo {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+
+.two-columns {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    column-count: 2;    /* Creates two columns automatically */
+    column-gap: 20px;   /* Space between columns */
+  }
+  
+  .two-columns li {
+    margin-bottom: 5px; /* Spacing between links */
+  }
+  
+  /* On smaller screens, go back to 1 column if you like */
+  @media screen and (max-width: 768px) {
+    .two-columns {
+      column-count: 1;
+    }
+  }
+  

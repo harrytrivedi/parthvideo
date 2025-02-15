@@ -112,8 +112,7 @@ if (!isset($_SESSION['userid'])) {
     </div>
 </div>
 
+<?php include_once '../includes/footer.php'; ?>
 
-<script>
 </body>
-
 </html>

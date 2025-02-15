@@ -104,7 +104,9 @@
             display: block;
         }
     </style>
+    <?php include_once '../includes/footer.php'; ?>
     <script src="..//js/script.js"></script>
 </body>
+
 
 </html>
