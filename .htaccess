@@ -1,0 +1,2 @@
+# Tell Apache to serve user/index.php as the default page
+DirectoryIndex user/index.php
