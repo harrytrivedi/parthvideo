@@ -6,10 +6,10 @@ WORKDIR /var/www/html
 # Copy the entire repository into the container
 COPY . .
 
-# Change Apache's DocumentRoot to /var/www/html/user
+# Update Apache's DocumentRoot to /var/www/html/user
 RUN sed -ri 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/user#g' /etc/apache2/sites-available/000-default.conf
 
-# Create an Apache alias configuration file using a heredoc
+# Create an Apache alias configuration file for css and js only (images are under user, so no alias)
 RUN cat <<'EOF' > /etc/apache2/conf-available/extra-alias.conf
 Alias /css /var/www/html/css
 <Directory "/var/www/html/css">
@@ -20,13 +20,6 @@ Alias /css /var/www/html/css
 
 Alias /js /var/www/html/js
 <Directory "/var/www/html/js">
-    Options Indexes FollowSymLinks
-    AllowOverride None
-    Require all granted
-</Directory>
-
-Alias /images /var/www/html/images
-<Directory "/var/www/html/images">
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
