@@ -1,11 +1,12 @@
 FROM php:8.2-apache
 
+# Set working directory to the repository root
 WORKDIR /var/www/html
 
-# Copy the entire repository
+# Copy the entire repository into the container
 COPY . .
 
-# Update Apache's DocumentRoot to /var/www/html/user
+# Change Apache's DocumentRoot to /var/www/html/user
 RUN sed -ri 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/user#g' /etc/apache2/sites-available/000-default.conf
 
 # Create an Apache alias configuration file using a heredoc
@@ -19,6 +20,13 @@ Alias /css /var/www/html/css
 
 Alias /js /var/www/html/js
 <Directory "/var/www/html/js">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+Alias /images /var/www/html/images
+<Directory "/var/www/html/images">
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
