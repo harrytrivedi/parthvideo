@@ -1,14 +1,16 @@
 FROM php:8.2-apache
 
-# Set working directory to the repository root
+# Set the working directory to the repository root
 WORKDIR /var/www/html
 
 # Copy the entire repository into the container
 COPY . .
 
-# Configure Apache to use user/index.php as the default index page
+# Create a custom Apache configuration to use user/index.php as the DirectoryIndex,
+# then enable that configuration.
 RUN echo "DirectoryIndex user/index.php" > /etc/apache2/conf-available/custom-index.conf \
-    && a2enconf custom-index \
-    && service apache2 reload
+    && a2enconf custom-index
 
 EXPOSE 80
+
+CMD ["apache2-foreground"]
