@@ -878,6 +878,7 @@ body.events-body .event-cards {
   }
   #chatbot-header span {
     font-size: 18px;
+    font-weight: bold;
   }
   
   /* Close Button */
@@ -937,6 +938,7 @@ body.events-body .event-cards {
     outline: none;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
+    margin: 0;
   }
   #chatbot-input-container button {
     padding: 10px;
