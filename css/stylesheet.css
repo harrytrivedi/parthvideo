@@ -988,6 +988,7 @@ body.events-body .event-cards {
     font-size: 14px;
     border-radius: 4px;
     box-sizing: border-box;
+    margin: 0;
     /* Dark text on lighter background might be reversed if you prefer */
 }
 

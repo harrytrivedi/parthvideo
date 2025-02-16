@@ -21,66 +21,66 @@ include_once '../includes/header.php';
         <div class="carousel" id="servicesCarousel">
             <!-- Card 1 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Event+Management" alt="Event Management">
+                <img src="../user/images/eventman.jpg" alt="Event Management">
                 <h3>Event Management</h3>
                 <p>We provide comprehensive event planning and management for all occasions.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 2 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Video+Production" alt="Video Production">
+                <img src="../user/images/videoprod.jpg" alt="Video Production">
                 <h3>Video Production</h3>
                 <p>High-quality video production to capture your precious moments.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 3 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Corporate+Events" alt="Corporate Events">
+                <img src="../user/images/corpeven.jpg" alt="Corporate Events">
                 <h3>Corporate Events</h3>
                 <p>Professional coverage and planning for corporate events and conferences.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 4 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Photography" alt="Photography">
+                <img src="../user/images/photograp.jpeg" alt="Photography">
                 <h3>Photography</h3>
                 <p>Capturing the essence of your special moments in stunning photographs.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 5 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Live+Streaming" alt="Live Streaming">
+                <img src="../user/images/livestream.jpg" alt="Live Streaming">
                 <h3>Live Streaming</h3>
                 <p>Broadcast your events in real time to reach a global audience.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 6 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Wedding" alt="Wedding">
+                <img src="../user/images/wedding.jpeg" alt="Wedding">
                 <h3>Wedding</h3>
                 <p>Expert wedding coverage, from ceremonies to receptions.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 7 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Ring+Ceremony" alt="Ring Ceremony">
+                <img src="../user/images/ringcer.jpeg" alt="Ring Ceremony">
                 <h3>Ring Ceremony</h3>
                 <p>Capture every magical moment of your engagement ceremony.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 8 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Birthday+Party" alt="Birthday Party">
+                <img src="../user/images/birthdayp.jpg" alt="Birthday Party">
                 <h3>Birthday Party</h3>
                 <p>From kids’ parties to milestone celebrations, we cover it all.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
             <!-- Card 9 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x200?text=Pre-Wedding+Package" alt="Pre-Wedding Package">
+                <img src="../user/images/prewed.jpg" alt="Pre-Wedding Package">
                 <h3>Pre-Wedding Package</h3>
                 <p>Special packages for pre-wedding photoshoot and videoshoot.</p>
-                <a href="#" class="card-btn">Learn More</a>
+                <a href="../user/booknow.php" class="card-btn">Learn More</a>
             </div>
         </div>
         <button class="carousel-btn next" id="nextBtn" onclick="moveCarousel(1)">&gt;</button>
