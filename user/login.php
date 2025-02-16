@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Parth Video</title>
-    <link rel="stylesheet" href="../css/stylesheet.css">
-    <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
-    <script>
-        // Function to toggle password visibility
-        function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("password");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-            } else {
-                passwordInput.type = "password";
-            }
-        }
-    </script>
-</head>
-
-<body>
 <?php
-// Start the session before any output
+// Start the session immediately—no output before this!
 session_start();
 
-// Include the PostgreSQL database connection file
+// Include the database connection file
 include_once 'cryptoshow_db.php';
 
 // Initialize error variable
@@ -41,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Query for admin users
         $sql_admin = "SELECT * FROM users WHERE username = $1 AND level = 1";
-        // Prepare and execute the query
         $result_admin = pg_prepare($conn, "admin_query", $sql_admin);
         $result_admin = pg_execute($conn, "admin_query", array($username));
         $row_admin = pg_fetch_assoc($result_admin);
@@ -80,6 +56,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Parth Video</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
+    <script>
+        // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+    </script>
+</head>
+
+<body>
     <div class="container">
         <button id="modeToggle" class="night-mode-button"><i class="fa-solid fa-sun"></i> Light Mode </button>
         <div class="form-container">
