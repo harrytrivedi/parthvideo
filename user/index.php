@@ -11,8 +11,9 @@ include_once '../includes/header.php';
     </div>
     <div class="hero-section-img"></div>
 </div>
-
-<!-- Other sections of the homepage -->
+<!-- Chatbot  -->
+<?php include_once '../includes/chatbot.php'; ?>
+<!-- Footer -->
 <?php include_once '../includes/footer.php'; ?>
 
 <script src="../js/script.js"></script>
