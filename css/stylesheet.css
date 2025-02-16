@@ -946,6 +946,7 @@ body.events-body .event-cards {
     cursor: pointer;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
+    font-weight: bold;
     transition: background-color 0.3s ease;
   }
   #chatbot-input-container button:hover {
