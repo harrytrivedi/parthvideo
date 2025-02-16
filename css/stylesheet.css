@@ -429,12 +429,14 @@ a:hover {
     background-size: cover;
     background-position: center;
     color: #ffffff;
-    padding: 100px 20px 0 20px; /* No bottom padding, or minimal bottom padding */
+    padding: 100px 20px 0 20px;
+    /* No bottom padding, or minimal bottom padding */
     text-align: center;
     margin-bottom: 0;
     position: relative;
     min-height: 85vh;
 }
+
 .container1 {
     background-size: cover;
     background-position: center;
@@ -1162,4 +1164,86 @@ body.events-body .event-cards {
     .card {
         flex: 0 0 250px;
     }
+}
+
+/* Book Now Container */
+.book-now-container {
+    width: 60%;
+    max-width: 600px;
+    margin: 80px auto;
+    /* Center horizontally and add vertical spacing */
+    background-color: #111;
+    /* Dark background to match your theme */
+    border-radius: 10px;
+    padding: 30px;
+    /* Optional box-shadow for depth */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading for Book Now */
+.book-now-container h1 {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    color: #5ecfff;
+    margin-bottom: 20px;
+}
+
+/* Response message styling */
+#formResponse {
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    color: #5ecfff;
+    /* or #fff, your preference */
+    text-align: center;
+}
+
+/* Labels */
+.book-now-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    /* White text for dark background */
+}
+
+/* Inputs and Textarea */
+.book-now-container input[type="text"],
+.book-now-container input[type="email"],
+.book-now-container input[type="tel"],
+.book-now-container textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #000;
+    /* Dark text inside the fields */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+.book-now-container input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: #fff;
+    background-color: #5e17eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+}
+
+.book-now-container input[type="submit"]:hover {
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
+    color: #000;
 }
