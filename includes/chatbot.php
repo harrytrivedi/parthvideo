@@ -1,9 +1,9 @@
 <?php
-// chatbot.php
+// includes/chatbot.php
 ?>
-<!-- Chatbot Icon -->
+<!-- Chatbot Icon using Font Awesome -->
 <div id="chatbot-icon" onclick="openChatbot()">
-  <img src="/user/images/chat-icon.png" alt="Chat with us">
+  <i class="fa-solid fa-comment-dots"></i>
 </div>
 
 <!-- Chatbot Window -->
@@ -19,8 +19,8 @@
   </div>
 </div>
 
-<!-- Include the chatbot CSS -->
-<link rel="stylesheet" type="text/css" href="/css/chatbot.css">
+<!-- Link to Chatbot CSS -->
+<link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
 
 <script>
 // Open and close functions
@@ -31,13 +31,13 @@ function closeChatbot() {
     document.getElementById('chatbot-window').style.display = 'none';
 }
 
-// Append a message to the chat window
+// Append a message bubble to the chat window
 function appendChatMessage(sender, message) {
     var messagesDiv = document.getElementById('chatbot-messages');
     var msgDiv = document.createElement('div');
     msgDiv.classList.add('chat-message');
     msgDiv.classList.add(sender.toLowerCase());
-    msgDiv.innerHTML = "<strong>" + sender + ":</strong> " + message;
+    msgDiv.innerHTML = "<span class='message-text'>" + message + "</span>";
     messagesDiv.appendChild(msgDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
@@ -71,28 +71,60 @@ function sendChatbotMessage() {
     
     // Simulate bot typing
     showTypingIndicator();
-    setTimeout(function(){
-        removeTypingIndicator();
-        var botResponse = getBotResponse(message);
-        appendChatMessage("Bot", botResponse);
-    }, 1000);
+    setTimeout(function() {
+        // Check for keywords and, if needed, fetch content
+        getBotResponse(message);
+    }, 500);
 }
 
-// Simple bot logic; customize as needed
+// Function to get bot response (using AJAX for some keywords)
 function getBotResponse(message) {
-    message = message.toLowerCase();
-    if(message.includes("hello") || message.includes("hi")) {
-        return "Hello! How can I help you today?";
-    } else if(message.includes("booking")) {
-        return "For booking inquiries, please visit our booking page.";
-    } else if(message.includes("price")) {
-        return "You can check our pricing details on the pricing page.";
-    } else {
-        return "I'm sorry, I didn't understand that. Could you please rephrase?";
+    var lowerMsg = message.toLowerCase();
+    
+    // If the message mentions "services", fetch from services_summary.php
+    if(lowerMsg.includes("service")) {
+        fetch('../includes/services_summary.php')
+            .then(response => response.text())
+            .then(text => {
+                removeTypingIndicator();
+                appendChatMessage("Bot", text);
+            })
+            .catch(error => {
+                removeTypingIndicator();
+                appendChatMessage("Bot", "Sorry, I couldn't fetch services info right now.");
+            });
+    }
+    // If the message mentions "about" or "history", fetch from aboutus_summary.php
+    else if(lowerMsg.includes("about") || lowerMsg.includes("history")) {
+        fetch('../includes/aboutus_summary.php')
+            .then(response => response.text())
+            .then(text => {
+                removeTypingIndicator();
+                appendChatMessage("Bot", text);
+            })
+            .catch(error => {
+                removeTypingIndicator();
+                appendChatMessage("Bot", "Sorry, I couldn't fetch about us info right now.");
+            });
+    }
+    // Otherwise, use default responses
+    else {
+        removeTypingIndicator();
+        var response = "";
+        if(lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
+            response = "Hello! How can I help you today?";
+        } else if(lowerMsg.includes("booking")) {
+            response = "For booking inquiries, please visit our booking page.";
+        } else if(lowerMsg.includes("price")) {
+            response = "You can find our pricing details on our pricing page.";
+        } else {
+            response = "I'm sorry, I didn't understand that. Could you please rephrase?";
+        }
+        appendChatMessage("Bot", response);
     }
 }
 
-// Allow sending with Enter key
+// Allow sending messages with Enter key
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
     if(e.key === "Enter") {
         sendChatbotMessage();
