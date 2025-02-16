@@ -1,4 +1,71 @@
-<!-- Registration Page -->
+<?php
+session_start();
+
+// Include the PostgreSQL database connection file
+require_once "cryptoshow_db.php";
+
+// Initialize error array
+$errors = array();
+
+if (isset($_POST["submit"])) {
+    // Trim inputs to remove accidental spaces
+    $username = trim($_POST["username"]);
+    $fullName = trim($_POST["fullname"]);
+    $email    = trim($_POST["email"]);
+    $password = $_POST["password"];
+
+    // Validate fields
+    if (empty($username) || empty($fullName) || empty($email) || empty($password)) {
+        $errors[] = "All fields are required";
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Email is not valid";
+    }
+    if (strlen($password) < 8) {
+        $errors[] = "Password must be at least 8 characters long";
+    }
+
+    // Check if email already exists using PostgreSQL
+    $sql = "SELECT * FROM users WHERE email = $1";
+    $result = pg_prepare($conn, "check_email", $sql);
+    $result = pg_execute($conn, "check_email", array($email));
+    $rowCount = pg_num_rows($result);
+    if ($rowCount > 0) {
+        $errors[] = "Email already exists!";
+    }
+
+    if (count($errors) == 0) {
+        // Process file upload for avatar, if provided
+        $avatar = "";
+        if (isset($_FILES["avatar"]) && $_FILES["avatar"]["name"] != "") {
+            $avatar = $_FILES["avatar"]["name"];
+            $avatarTempName = $_FILES["avatar"]["tmp_name"];
+            $avatarPath = '../user/images/uploads/' . $avatar;
+
+            if (!move_uploaded_file($avatarTempName, $avatarPath)) {
+                $errors[] = "Failed to upload avatar.";
+            }
+        }
+
+        // Only proceed if there are still no errors
+        if (count($errors) == 0) {
+            // Hash the password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insert user into the database using PostgreSQL prepared statement
+            $sql = "INSERT INTO users (username, fullname, email, password, avatar) VALUES ($1, $2, $3, $4, $5)";
+            $result = pg_prepare($conn, "insert_user", $sql);
+            $result = pg_execute($conn, "insert_user", array($username, $fullName, $email, $hashedPassword, $avatar));
+
+            if ($result) {
+                echo "<p>You are registered successfully.</p>";
+            } else {
+                $errors[] = "Registration failed. Please try again.";
+            }
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,66 +93,6 @@
     <div class="container">
         <button id="modeToggle" class="night-mode-button"><i class="fa-solid fa-sun"></i> Light Mode </button>
         <div class="form-container">
-            <?php
-            if (isset($_POST["submit"])) {
-                $username = $_POST["username"];
-                $fullName = $_POST["fullname"];
-                $email = $_POST["email"];
-                $password = $_POST["password"];
-
-                $errors = array();
-
-                if (empty($username) or empty($fullName) or empty($email) or empty($password)) {
-                    array_push($errors, "All fields are required");
-                }
-                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    array_push($errors, "Email is not valid");
-                }
-                if (strlen($password) < 8) {
-                    array_push($errors, "Password must be at least 8 characters long");
-                }
-                require_once "cryptoshow_db.php";
-                $sql = "SELECT * FROM users WHERE email = ?";
-                $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "s", $email);
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-                $rowCount = mysqli_num_rows($result);
-
-                if (empty($fullName)) {
-                    array_push($errors, "Full Name is required");
-                }
-                if ($rowCount > 0) {
-                    array_push($errors, "Email already exists!");
-                }
-
-                if (count($errors) > 0) {
-                    foreach ($errors as $error) {
-                        echo "<div class='alert alert-danger'>$error</div>";
-                    }
-                } else {
-                    $avatar = $_FILES["avatar"]["name"];
-                    $avatarTempName = $_FILES["avatar"]["tmp_name"];
-                    $avatarPath = '../user/images/uploads/' . $avatar;
-
-                    if (move_uploaded_file($avatarTempName, $avatarPath)) {
-                        // Store avatar information in session
-                        $_SESSION['avatar'] = $avatar;
-                        
-                        // Hash the password
-                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                        $sql = "INSERT INTO users (username, fullname, email, password, avatar) VALUES (?, ?, ?, ?, ?)";
-                        $stmt = mysqli_prepare($conn, $sql);
-                        mysqli_stmt_bind_param($stmt, "sssss", $username, $fullName, $email, $hashedPassword, $avatar);
-                        mysqli_stmt_execute($stmt);
-                        echo "<p>You are registered successfully.</p>";
-                    } else {
-                        echo "Failed to upload avatar.";
-                    }
-                    
-                }
-            }
-            ?>
             <h2>Register</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <label for="nickname">Username:</label>
