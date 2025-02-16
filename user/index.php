@@ -91,7 +91,7 @@ include_once '../includes/header.php';
 <section id="gallery">
     <h2 class="section-title">Gallery</h2>
     <div class="gallery-grid">
-        <img src="../user/images/image1.jpeg" alt="Gallery Image 1">
+        <img src="../user/images/image12.jpeg" alt="Gallery Image 1">
         <img src="../user/images/image2.jpeg" alt="Gallery Image 2">
         <img src="../user/images/image3.jpeg" alt="Gallery Image 3">
         <img src="../user/images/image5.jpeg" alt="Gallery Image 4">
