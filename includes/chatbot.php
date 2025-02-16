@@ -1,4 +1,5 @@
 <?php
+// verified chatbot files cloud @starkmehta
 // includes/chatbot.php
 ?>
 <!-- Chatbot Icon using Font Awesome -->
