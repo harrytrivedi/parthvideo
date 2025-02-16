@@ -433,6 +433,7 @@ a:hover {
     text-align: center;
     margin-bottom: 0;
     position: relative;
+    min-height: 85vh;
 }
 .container1 {
     background-size: cover;

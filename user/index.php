@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Homepage - Parth Video";
+$pageTitle = "Parth Video - Home";
 include_once '../includes/header.php';
 ?>
 
