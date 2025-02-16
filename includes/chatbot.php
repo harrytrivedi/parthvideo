@@ -3,7 +3,7 @@
 ?>
 <!-- Chatbot Icon using Font Awesome -->
 <div id="chatbot-icon" onclick="openChatbot()">
-  <i class="fa-solid fa-comment-dots"></i>
+  <i class="fa-solid fa-comments"></i>
 </div>
 
 <!-- Chatbot Window -->
