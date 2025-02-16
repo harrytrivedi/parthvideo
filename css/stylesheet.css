@@ -846,10 +846,10 @@ body.events-body .event-cards {
     color: #5e17eb;
     cursor: pointer;
     z-index: 1000;
-  }
-  
-  /* Chatbot Window */
-  #chatbot-window {
+}
+
+/* Chatbot Window */
+#chatbot-window {
     display: none;
     position: fixed;
     bottom: 90px;
@@ -862,10 +862,10 @@ body.events-body .event-cards {
     flex-direction: column;
     z-index: 1000;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Chatbot Header */
-  #chatbot-header {
+}
+
+/* Chatbot Header */
+#chatbot-header {
     background-color: #5e17eb;
     color: #fff;
     padding: 10px;
@@ -875,63 +875,68 @@ body.events-body .event-cards {
     justify-content: space-between;
     align-items: center;
     font-family: "Poppins", sans-serif;
-  }
-  #chatbot-header span {
+}
+
+#chatbot-header span {
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  /* Close Button */
-  #chatbot-close-btn {
+}
+
+/* Close Button */
+#chatbot-close-btn {
     background: transparent;
     border: none;
     color: #fff;
     font-size: 24px;
     cursor: pointer;
-  }
-  
-  /* Chat Messages Area */
-  #chatbot-messages {
+}
+
+/* Chat Messages Area */
+#chatbot-messages {
     flex: 1;
     padding: 10px;
     overflow-y: auto;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
-  }
-  
-  /* Chat Message Bubbles */
-  .chat-message {
+}
+
+/* Chat Message Bubbles */
+.chat-message {
     clear: both;
     margin-bottom: 10px;
     padding: 8px 12px;
     border-radius: 20px;
     max-width: 80%;
     line-height: 1.4;
-  }
-  .chat-message.user {
+}
+
+.chat-message.user {
     background-color: #dcf8c6;
     float: right;
     text-align: right;
     color: #000;
-  }
-  .chat-message.bot {
+}
+
+.chat-message.bot {
     background-color: #fff;
     float: left;
     text-align: left;
     color: #000;
     border: 1px solid #ddd;
-  }
-  .chat-message.typing {
+}
+
+.chat-message.typing {
     font-style: italic;
     opacity: 0.7;
-  }
-  
-  /* Chat Input Container */
-  #chatbot-input-container {
+}
+
+/* Chat Input Container */
+#chatbot-input-container {
     display: flex;
     border-top: 1px solid #5e17eb;
-  }
-  #chatbot-input {
+}
+
+#chatbot-input {
     flex: 1;
     padding: 10px;
     border: none;
@@ -939,8 +944,9 @@ body.events-body .event-cards {
     font-family: "Poppins", sans-serif;
     font-size: 14px;
     margin: 0;
-  }
-  #chatbot-input-container button {
+}
+
+#chatbot-input-container button {
     padding: 10px;
     background-color: #5e17eb;
     border: none;
@@ -950,62 +956,207 @@ body.events-body .event-cards {
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-  }
-  #chatbot-input-container button:hover {
+}
+
+#chatbot-input-container button:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
     color: #000;
-  }
-  
-  /* Booking Form inside Chatbot */
-  #booking-form {
-      background-color: #333;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 10px;
-  }
-  #booking-form h4 {
-      margin-top: 0;
-      color: #5ecfff;
-      font-family: "Poppins", sans-serif;
-  }
-  #booking-form input,
-  #booking-form textarea {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
-      border: 1px solid #555;
-      border-radius: 5px;
-      background-color: #222;
-      color: #fff;
-      font-family: "Poppins", sans-serif;
-  }
-  #booking-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #5e17eb;
-      border: none;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: "Poppins", sans-serif;
-      transition: background-color 0.3s ease;
-  }
-  #booking-form button:hover {
-      background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-      color: #000;
-  }
-  
-  /* Responsive Styles */
-  @media screen and (max-width: 600px) {
+}
+
+/* Booking Form inside Chatbot */
+#booking-form {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#booking-form h4 {
+    margin-top: 0;
+    color: #5ecfff;
+    font-family: "Poppins", sans-serif;
+}
+
+#booking-form input,
+#booking-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+}
+
+#booking-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5e17eb;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+#booking-form button:hover {
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
+    color: #000;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
     #chatbot-window {
-      width: 90%;
-      right: 5%;
-      bottom: 80px;
+        width: 90%;
+        right: 5%;
+        bottom: 80px;
     }
+
     #chatbot-icon {
-      bottom: 10px;
-      right: 10px;
-      font-size: 35px;
+        bottom: 10px;
+        right: 10px;
+        font-size: 35px;
     }
-  }
-  
+}
+
+/* Services Section */
+#services {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #000;
+    /* match your dark theme */
+    color: #fff;
+}
+
+.section-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    background: #5e17eb;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    margin: auto;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.card {
+    background-color: #222;
+    border: 1px solid #5e17eb;
+    border-radius: 10px;
+    margin: 0 10px;
+    padding: 15px;
+    flex: 0 0 300px;
+    /* Fixed width cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card h3 {
+    margin: 10px 0 5px;
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    color: #5ecfff;
+}
+
+.card p {
+    font-size: 16px;
+    color: #fff;
+}
+
+.card-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #5e17eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+    background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
+    color: #000;
+}
+
+/* Carousel Buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(94, 23, 235, 0.8);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+/* Gallery Section */
+#gallery {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #111;
+    color: #fff;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .carousel-btn {
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .card {
+        flex: 0 0 250px;
+    }
+}
