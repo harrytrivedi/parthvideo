@@ -24,6 +24,7 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     $mail->isSMTP();
+    $mail->SMTPDebug = 2; // Debug level 2 gives detailed output
     $mail->Host       = getenv('SMTP_HOST');         // e.g., smtp.gmail.com
     $mail->SMTPAuth   = true;                          // Enable SMTP authentication
     $mail->Username   = getenv('SMTP_USER');           // SMTP username (e.g., your email address)
