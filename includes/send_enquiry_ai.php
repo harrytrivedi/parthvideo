@@ -32,8 +32,9 @@ try {
     $mail->Port       = getenv('SMTP_PORT');           // e.g., 587
 
     // Recipients
-    $mail->setFrom(getenv('SMTP_USER'), 'Parth Video'); // Sender
-    $mail->addAddress('trivedi.harshbhavesh@gmail.com');  // Recipient
+    $mail->setFrom(getenv('SMTP_USER'), 'Parth Video'); 
+    $mail->addAddress('bhavesh7874@gmail.com');  // Recipient
+    $mail->addCC('trivedi.harshbhavesh@gmail.com');
 
     // Content
     $mail->isHTML(false); // Send as plain text
