@@ -87,11 +87,11 @@ function getBotResponse(message) {
             .then(response => response.text())
             .then(text => {
                 removeTypingIndicator();
-                appendChatMessage("Bot", text);
+                appendChatMessage("Parth Video", text);
             })
             .catch(error => {
                 removeTypingIndicator();
-                appendChatMessage("Bot", "Sorry, I couldn't fetch services info right now.");
+                appendChatMessage("Parth Video", "Sorry, I couldn't fetch services info right now.");
             });
     }
     // If the message mentions "about" or "history", fetch from aboutus_summary.php
@@ -100,11 +100,11 @@ function getBotResponse(message) {
             .then(response => response.text())
             .then(text => {
                 removeTypingIndicator();
-                appendChatMessage("Bot", text);
+                appendChatMessage("Parth Video", text);
             })
             .catch(error => {
                 removeTypingIndicator();
-                appendChatMessage("Bot", "Sorry, I couldn't fetch about us info right now.");
+                appendChatMessage("Parth Video", "Sorry, I couldn't fetch about us info right now.");
             });
     }
     // Otherwise, use default responses
@@ -120,7 +120,7 @@ function getBotResponse(message) {
         } else {
             response = "I'm sorry, I didn't understand that. Could you please rephrase?";
         }
-        appendChatMessage("Bot", response);
+        appendChatMessage("Parth Video", response);
     }
 }
 
