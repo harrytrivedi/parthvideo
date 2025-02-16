@@ -103,7 +103,7 @@ function handleAIMessage(userMessage) {
     // Add user message to chatHistory
     chatHistory.push({role: 'user', content: userMessage});
 
-    fetch('../includes/ai_chat.php', {
+    fetch('../includes/ai_chat_aimlapi.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chatHistory })
