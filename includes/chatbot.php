@@ -1,5 +1,4 @@
 <?php
-// verified chatbot files cloud @starkmehta
 // includes/chatbot.php
 ?>
 <!-- Chatbot Icon using Font Awesome -->
@@ -20,11 +19,13 @@
   </div>
 </div>
 
-<!-- Link to Chatbot CSS -->
 <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
 
 <script>
-// Open and close functions
+let isAIPlanning = false;  // Track if user is in AI wedding planning flow
+let planDetails = {};      // Store user details (name, days, services, etc.)
+let chatHistory = [];      // Keep short conversation context for AI
+
 function openChatbot() {
     document.getElementById('chatbot-window').style.display = 'flex';
 }
@@ -32,84 +33,121 @@ function closeChatbot() {
     document.getElementById('chatbot-window').style.display = 'none';
 }
 
-// Append a message bubble to the chat window
+// Utility to append messages
 function appendChatMessage(sender, message) {
-    var messagesDiv = document.getElementById('chatbot-messages');
-    var msgDiv = document.createElement('div');
-    msgDiv.classList.add('chat-message');
-    msgDiv.classList.add(sender.toLowerCase());
-    msgDiv.innerHTML = "<span class='message-text'>" + message + "</span>";
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('chat-message', sender.toLowerCase());
+    msgDiv.innerHTML = `<span class='message-text'>${message}</span>`;
     messagesDiv.appendChild(msgDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Show typing indicator with custom text
 function showTypingIndicator() {
-    var messagesDiv = document.getElementById('chatbot-messages');
-    var typingDiv = document.createElement('div');
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const typingDiv = document.createElement('div');
     typingDiv.classList.add('chat-message', 'bot', 'typing');
     typingDiv.id = 'typing-indicator';
     typingDiv.innerHTML = "<em>Parth Video is typing...</em>";
     messagesDiv.appendChild(typingDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
 function removeTypingIndicator() {
-    var typingDiv = document.getElementById('typing-indicator');
+    const typingDiv = document.getElementById('typing-indicator');
     if(typingDiv) {
         typingDiv.remove();
     }
 }
 
-// Process and send the user's message
+// Main send message function
 function sendChatbotMessage() {
-    var input = document.getElementById('chatbot-input');
-    var message = input.value.trim();
-    if(message === "") return;
-    
-    // Append user's message
+    const input = document.getElementById('chatbot-input');
+    let message = input.value.trim();
+    if (!message) return;
+
     appendChatMessage("User", message);
     input.value = "";
-    
-    // If the message includes "book" or "booking", show the booking form instead of a text response
-    if(message.toLowerCase().includes("book")) {
+
+    // If user says "book now" at any time
+    if(message.toLowerCase().includes("book now")) {
         showBookingForm();
-    } else {
-        // Otherwise, simulate bot typing and generate a normal response
-        showTypingIndicator();
-        setTimeout(function() {
-            removeTypingIndicator();
-            getBotResponse(message);
-        }, 1000);
+        return;
     }
+
+    // If user wants wedding/event advice
+    if(message.toLowerCase().includes("wedding") || message.toLowerCase().includes("event advice") || message.toLowerCase().includes("planning")) {
+        isAIPlanning = true;
+        handleAIMessage(message);
+        return;
+    }
+
+    // If already in AI planning flow
+    if(isAIPlanning) {
+        handleAIMessage(message);
+        return;
+    }
+
+    // Otherwise, fallback to your existing getBotResponse
+    showTypingIndicator();
+    setTimeout(() => {
+        removeTypingIndicator();
+        getBotResponse(message);
+    }, 1000);
 }
 
-// Function to get bot response for simple keywords
+// AI Flow
+function handleAIMessage(userMessage) {
+    showTypingIndicator();
+
+    // Add user message to chatHistory
+    chatHistory.push({role: 'user', content: userMessage});
+
+    fetch('../includes/ai_chat.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatHistory })
+    })
+    .then(res => res.json())
+    .then(data => {
+        removeTypingIndicator();
+        if(data.success) {
+            // AI reply
+            const reply = data.reply;
+            appendChatMessage("Bot", reply);
+
+            // Keep track of conversation
+            chatHistory.push({role: 'assistant', content: reply});
+        } else {
+            appendChatMessage("Bot", "Sorry, I couldn't process your request right now.");
+        }
+    })
+    .catch(err => {
+        removeTypingIndicator();
+        appendChatMessage("Bot", "Error contacting AI service. Please try again.");
+        console.error(err);
+    });
+}
+
+// Fallback getBotResponse for simple keywords
 function getBotResponse(message) {
-    var lowerMsg = message.toLowerCase();
-    var response = "";
+    const lowerMsg = message.toLowerCase();
+    let response = "";
     if(lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
         response = "Hello! How can I help you today?";
     } else if(lowerMsg.includes("service")) {
-        // Fetch services summary via AJAX
+        // example
         fetch('../includes/services_summary.php')
-            .then(response => response.text())
-            .then(text => {
-                appendChatMessage("Bot", text);
-            })
-            .catch(error => {
-                appendChatMessage("Bot", "Sorry, I couldn't fetch services info right now.");
-            });
+            .then(r => r.text())
+            .then(txt => appendChatMessage("Bot", txt))
+            .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch services info."));
         return;
     } else if(lowerMsg.includes("about") || lowerMsg.includes("history")) {
-        // Fetch about us summary via AJAX
+        // example
         fetch('../includes/aboutus_summary.php')
-            .then(response => response.text())
-            .then(text => {
-                appendChatMessage("Bot", text);
-            })
-            .catch(error => {
-                appendChatMessage("Bot", "Sorry, I couldn't fetch about us info right now.");
-            });
+            .then(r => r.text())
+            .then(txt => appendChatMessage("Bot", txt))
+            .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch about us info."));
         return;
     } else if(lowerMsg.includes("price")) {
         response = "You can find our pricing details on our pricing page.";
@@ -121,12 +159,9 @@ function getBotResponse(message) {
 
 // Display the booking enquiry form inside the chat window
 function showBookingForm() {
-    // Clear previous messages (optional)
-    var messagesDiv = document.getElementById('chatbot-messages');
-    messagesDiv.innerHTML = "";
-    
-    // Create the booking form HTML
-    var formHTML = `
+    const messagesDiv = document.getElementById('chatbot-messages');
+    messagesDiv.innerHTML = ""; // Clear old messages
+    const formHTML = `
         <div id="booking-form">
             <h4>Book Now</h4>
             <input type="text" id="booking-name" placeholder="Your Name" required><br>
@@ -143,42 +178,40 @@ function showBookingForm() {
 
 // Submit the booking form via AJAX to send an email
 function submitBookingForm() {
-    var name = document.getElementById('booking-name').value.trim();
-    var email = document.getElementById('booking-email').value.trim();
-    var phone = document.getElementById('booking-phone').value.trim();
-    var enquiryFor = document.getElementById('booking-enquiry-for').value.trim();
-    var message = document.getElementById('booking-message').value.trim();
+    const name = document.getElementById('booking-name').value.trim();
+    const email = document.getElementById('booking-email').value.trim();
+    const phone = document.getElementById('booking-phone').value.trim();
+    const enquiryFor = document.getElementById('booking-enquiry-for').value.trim();
+    const message = document.getElementById('booking-message').value.trim();
     
-    if(name === "" || email === "" || phone === "" || enquiryFor === "" || message === "") {
+    if(!name || !email || !phone || !enquiryFor || !message) {
         alert("Please fill in all fields.");
         return;
     }
     
-    // Prepare data to send
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('enquiryFor', enquiryFor);
     formData.append('message', message);
     
-    // Send data via fetch POST to send_enquiry.php
     fetch('../includes/send_enquiry.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.text())
+    .then(r => r.text())
     .then(responseText => {
-        // Clear the booking form and show response
         document.getElementById('chatbot-messages').innerHTML = "";
         appendChatMessage("Bot", responseText);
     })
     .catch(error => {
         appendChatMessage("Bot", "Sorry, there was an error sending your enquiry.");
+        console.error(error);
     });
 }
 
-// Allow sending messages with Enter key in the main input (not the booking form)
+// Allow sending messages with Enter key in main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
     if(e.key === "Enter") {
         sendChatbotMessage();
