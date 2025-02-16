@@ -33,7 +33,7 @@ function closeChatbot() {
     document.getElementById('chatbot-window').style.display = 'none';
 }
 
-// Utility to append messages
+// Utility: append message bubble
 function appendChatMessage(sender, message) {
     const messagesDiv = document.getElementById('chatbot-messages');
     const msgDiv = document.createElement('div');
@@ -60,35 +60,37 @@ function removeTypingIndicator() {
     }
 }
 
-// Main send message function
+// Main function to send a message
 function sendChatbotMessage() {
     const input = document.getElementById('chatbot-input');
     let message = input.value.trim();
     if (!message) return;
-
+    
     appendChatMessage("User", message);
     input.value = "";
-
-    // If user says "book now" at any time
+    
+    // If user says "book now", show booking form
     if(message.toLowerCase().includes("book now")) {
         showBookingForm();
         return;
     }
-
-    // If user wants wedding/event advice
-    if(message.toLowerCase().includes("wedding") || message.toLowerCase().includes("event advice") || message.toLowerCase().includes("planning")) {
+    
+    // If user is asking for wedding/event advice
+    if(message.toLowerCase().includes("wedding") ||
+       message.toLowerCase().includes("event advice") ||
+       message.toLowerCase().includes("planning")) {
         isAIPlanning = true;
         handleAIMessage(message);
         return;
     }
-
-    // If already in AI planning flow
+    
+    // If already in AI planning flow, continue it
     if(isAIPlanning) {
         handleAIMessage(message);
         return;
     }
-
-    // Otherwise, fallback to your existing getBotResponse
+    
+    // Otherwise, fallback simple response
     showTypingIndicator();
     setTimeout(() => {
         removeTypingIndicator();
@@ -96,13 +98,13 @@ function sendChatbotMessage() {
     }, 1000);
 }
 
-// AI Flow
+// AI Flow: now using AIMLAPI endpoint
 function handleAIMessage(userMessage) {
     showTypingIndicator();
-
-    // Add user message to chatHistory
+    
+    // Add user message to chat history
     chatHistory.push({role: 'user', content: userMessage});
-
+    
     fetch('../includes/ai_chat_aimlapi.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -112,19 +114,17 @@ function handleAIMessage(userMessage) {
     .then(data => {
         removeTypingIndicator();
         if(data.success) {
-            // AI reply
             const reply = data.reply;
             appendChatMessage("Bot", reply);
-
-            // Keep track of conversation
             chatHistory.push({role: 'assistant', content: reply});
         } else {
-            appendChatMessage("Bot", "Sorry, I couldn't process your request right now.");
+            // Fallback message if AIMLAPI doesn't return a valid reply
+            appendChatMessage("Bot", "I'm sorry, I couldn't process your wedding advice request right now.");
         }
     })
     .catch(err => {
         removeTypingIndicator();
-        appendChatMessage("Bot", "Error contacting AI service. Please try again.");
+        appendChatMessage("Bot", "Error contacting AI service. Please try again later.");
         console.error(err);
     });
 }
@@ -136,14 +136,12 @@ function getBotResponse(message) {
     if(lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
         response = "Hello! How can I help you today?";
     } else if(lowerMsg.includes("service")) {
-        // example
         fetch('../includes/services_summary.php')
             .then(r => r.text())
             .then(txt => appendChatMessage("Bot", txt))
             .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch services info."));
         return;
     } else if(lowerMsg.includes("about") || lowerMsg.includes("history")) {
-        // example
         fetch('../includes/aboutus_summary.php')
             .then(r => r.text())
             .then(txt => appendChatMessage("Bot", txt))
@@ -157,10 +155,10 @@ function getBotResponse(message) {
     appendChatMessage("Bot", response);
 }
 
-// Display the booking enquiry form inside the chat window
+// Display booking form inside chat window
 function showBookingForm() {
     const messagesDiv = document.getElementById('chatbot-messages');
-    messagesDiv.innerHTML = ""; // Clear old messages
+    messagesDiv.innerHTML = ""; // Clear messages
     const formHTML = `
         <div id="booking-form">
             <h4>Book Now</h4>
@@ -211,7 +209,7 @@ function submitBookingForm() {
     });
 }
 
-// Allow sending messages with Enter key in main input
+// Allow sending message with Enter key in the main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
     if(e.key === "Enter") {
         sendChatbotMessage();
