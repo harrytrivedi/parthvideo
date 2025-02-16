@@ -47,4 +47,56 @@ document.addEventListener("DOMContentLoaded", function() {
         modeToggle.innerHTML = `<i class="${body.classList.contains("night-mode") ? "fa-solid fa-moon" : "fa-solid fa-sun"}"></i> ${buttonText}`;
     });
 });
+// ===== Carousel Boundary Logic =====
+document.addEventListener("DOMContentLoaded", function() {
+    const carousel = document.querySelector('.carousel');
+    const cards = document.querySelectorAll('.carousel .card');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    if (!carousel || !cards.length || !prevBtn || !nextBtn) {
+        // If elements aren't found, exit early
+        return;
+    }
+
+    let currentIndex = 0;
+    const cardWidth = cards[0].offsetWidth + 20; // card width + margin
+
+    // Initialize button visibility
+    checkButtons();
+
+    // Attach click events
+    prevBtn.addEventListener('click', function() {
+        moveCarousel(-1);
+    });
+    nextBtn.addEventListener('click', function() {
+        moveCarousel(1);
+    });
+
+    function moveCarousel(direction) {
+        currentIndex += direction;
+        // Clamp the index between 0 and cards.length - 1
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex > cards.length - 1) currentIndex = cards.length - 1;
+
+        carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        checkButtons();
+    }
+
+    function checkButtons() {
+        // Hide prev button if at the first card
+        if (currentIndex === 0) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = 'block';
+        }
+
+        // Hide next button if at the last card
+        if (currentIndex === cards.length - 1) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'block';
+        }
+    }
+});
 
