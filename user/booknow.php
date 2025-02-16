@@ -22,11 +22,13 @@ include_once '../includes/header.php';
     border-radius: 10px;
     color: #fff;        /* White text for contrast */
     font-family: "Poppins", sans-serif;
+    margin-top: 30px;
 }
 
 .book-now-container h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: white;
 }
 
 #formResponse {
