@@ -21,78 +21,64 @@
 </head>
 
 <body>
-    <?php
-    session_start(); // Start the session
-    
-    // Include the database connection file
-    include_once 'cryptoshow_db.php';
+<?php
+// Start the session before any output
+session_start();
 
-    // Initialize error variable
-    $error = "";
+// Include the PostgreSQL database connection file
+include_once 'cryptoshow_db.php';
 
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get username and password from the form
-        $username = mysqli_real_escape_string($conn, $_POST['username']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+// Initialize error variable
+$error = "";
 
-        // Check if username or password is empty
-        if (empty($username) || empty($password)) {
-            $error = "Please enter both username and password";
-        } else {
-            // Query to check if the username and password match for admin
-            $sql_admin = "SELECT * FROM users WHERE username=? AND level=1";
-            $stmt_admin = mysqli_stmt_init($conn);
-            if (mysqli_stmt_prepare($stmt_admin, $sql_admin)) {
-                mysqli_stmt_bind_param($stmt_admin, "s", $username);
-                mysqli_stmt_execute($stmt_admin);
-                $result_admin = mysqli_stmt_get_result($stmt_admin);
-                $row_admin = mysqli_fetch_assoc($result_admin);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get username and password from the form, using PostgreSQL escaping
+    $username = pg_escape_string($conn, $_POST['username']);
+    $password = pg_escape_string($conn, $_POST['password']);
 
-                // If result matched $username and $password for admin, table row must be 1 row
-                if ($row_admin && password_verify($password, $row_admin['password'])) {
-                    // Set session variables for admin
-                    $_SESSION['userid'] = $row_admin['userid'];
-                    $_SESSION['username'] = $row_admin['username'];
-                    $_SESSION['fullname'] = $row_admin['fullname']; // Corrected variable name
-                    $_SESSION['email'] = $row_admin['email']; // Corrected variable name
-                    $_SESSION['avatar'] = $row_admin['avatar']; // Corrected variable name
-                    // Redirect to admin page
-                    header("location: ../admin/admin.php");
-                    exit(); // Make sure to exit after redirection
-                }
-            }
+    if (empty($username) || empty($password)) {
+        $error = "Please enter both username and password";
+    } else {
+        // Query for admin users
+        $sql_admin = "SELECT * FROM users WHERE username = $1 AND level = 1";
+        // Prepare and execute the query
+        $result_admin = pg_prepare($conn, "admin_query", $sql_admin);
+        $result_admin = pg_execute($conn, "admin_query", array($username));
+        $row_admin = pg_fetch_assoc($result_admin);
 
-            // Query to check if the username and password match for regular users
-            $sql_user = "SELECT * FROM users WHERE username=? AND level=0";
-            $stmt_user = mysqli_stmt_init($conn);
-            if (mysqli_stmt_prepare($stmt_user, $sql_user)) {
-                mysqli_stmt_bind_param($stmt_user, "s", $username);
-                mysqli_stmt_execute($stmt_user);
-                $result_user = mysqli_stmt_get_result($stmt_user);
-                $row_user = mysqli_fetch_assoc($result_user);
-
-                // If result matched $username and $password for regular users, table row must be 1 row
-                if ($row_user && password_verify($password, $row_user['password'])) {
-                    // Set session variables for regular users
-                    $_SESSION['userid'] = $row_user['userid'];
-                    $_SESSION['username'] = $row_user['username'];
-                    $_SESSION['fullname'] = $row_user['fullname'];
-                    $_SESSION['email'] = $row_user['email'];
-                    $_SESSION['avatar'] = $row_user['avatar'];
-
-                    // Redirect to home page
-                    header("location: index.php");
-                    exit(); // Make sure to exit after redirection
-                }
-
-            }
-
-            // If username or password is incorrect, display error message
-            $error = "Invalid username or password";
+        // If admin found and password is correct
+        if ($row_admin && password_verify($password, $row_admin['password'])) {
+            $_SESSION['userid']   = $row_admin['userid'];
+            $_SESSION['username'] = $row_admin['username'];
+            $_SESSION['fullname'] = $row_admin['fullname'];
+            $_SESSION['email']    = $row_admin['email'];
+            $_SESSION['avatar']   = $row_admin['avatar'];
+            header("Location: ../admin/admin.php");
+            exit();
         }
+
+        // Query for regular users
+        $sql_user = "SELECT * FROM users WHERE username = $1 AND level = 0";
+        $result_user = pg_prepare($conn, "user_query", $sql_user);
+        $result_user = pg_execute($conn, "user_query", array($username));
+        $row_user = pg_fetch_assoc($result_user);
+
+        // If user found and password is correct
+        if ($row_user && password_verify($password, $row_user['password'])) {
+            $_SESSION['userid']   = $row_user['userid'];
+            $_SESSION['username'] = $row_user['username'];
+            $_SESSION['fullname'] = $row_user['fullname'];
+            $_SESSION['email']    = $row_user['email'];
+            $_SESSION['avatar']   = $row_user['avatar'];
+            header("Location: index.php");
+            exit();
+        }
+
+        // If no match found
+        $error = "Invalid username or password";
     }
-    ?>
+}
+?>
 
     <div class="container">
         <button id="modeToggle" class="night-mode-button"><i class="fa-solid fa-sun"></i> Light Mode </button>
