@@ -23,11 +23,10 @@
 <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
 
 <script>
-// Global variables for the chatbot
-let isAIPlanning = false;  // Can be 'idle', 'collecting', or 'complete'
-let aiState = "idle";      // For our rule-based planning flow
-let planData = {};         // Store user-provided plan details
-let chatHistory = [];      // (Optional) For keeping conversation context if needed
+// Global variables for the chatbot planning flow
+let aiState = "idle";      // 'idle', 'collecting', or 'complete'
+let planData = {};         // To store user input: eventType, days, services, contact
+let chatHistory = [];      // Optional conversation context
 
 // Open and close chatbot window
 function openChatbot() {
@@ -47,7 +46,7 @@ function appendChatMessage(sender, message) {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Show and remove typing indicator
+// Show typing indicator
 function showTypingIndicator() {
     const messagesDiv = document.getElementById('chatbot-messages');
     const typingDiv = document.createElement('div');
@@ -73,28 +72,56 @@ function sendChatbotMessage() {
     appendChatMessage("User", message);
     input.value = "";
     
-    // If user types "book now", show booking form
-    if (message.toLowerCase().includes("book now")) {
-        showBookingForm();
+    // If user types "book now" while planning is complete, submit enquiry directly
+    if (aiState === "complete" && message.toLowerCase().includes("book now")) {
+        submitPlanEnquiry();
+        aiState = "idle"; // Reset for next conversation
+        planData = {};
+        chatHistory = [];
         return;
     }
     
-    // If user asks for wedding/event advice or planning
-    if (message.toLowerCase().includes("wedding") || 
-        message.toLowerCase().includes("advice") || 
-        message.toLowerCase().includes("planning")) {
-        // Start or continue the rule-based AI planning flow
-        handleAIMessage(message);
+    // If user asks for wedding/event advice and planning hasn't started
+    if (aiState === "idle" && (message.toLowerCase().includes("wedding") || message.toLowerCase().includes("advice"))) {
+        aiState = "collecting";
+        appendChatMessage("Bot", "Sure, I can help plan your wedding. What type of event is it? (e.g., wedding, ring ceremony, birthday)");
         return;
     }
     
-    // If already in planning flow, continue it
-    if (aiState !== "idle") {
-        handleAIMessage(message);
+    // If in planning flow, continue collecting details
+    if (aiState === "collecting") {
+        if (!planData.eventType) {
+            planData.eventType = message;
+            appendChatMessage("Bot", "Great. How many days of service do you need?");
+            return;
+        }
+        if (!planData.days) {
+            planData.days = message;
+            appendChatMessage("Bot", "What services do you need? (e.g., photography, videography, live streaming, event management, etc.)");
+            return;
+        }
+        if (!planData.services) {
+            planData.services = message;
+            appendChatMessage("Bot", "Could you please provide your Name, Email, and Phone number? (separated by commas)");
+            return;
+        }
+        if (!planData.contact) {
+            // Expect input like: "John Doe, john@example.com, 1234567890"
+            planData.contact = message;
+            aiState = "complete";
+            const plan = `Plan Summary:\nEvent: ${planData.eventType}\nDuration: ${planData.days} days\nServices: ${planData.services}\nContact: ${planData.contact}\n\nIf you'd like to proceed, please type "book now".`;
+            appendChatMessage("Bot", plan);
+            return;
+        }
+    }
+    
+    // If planning is complete but user doesn't say "book now", remind them
+    if (aiState === "complete") {
+        appendChatMessage("Bot", "If you'd like to proceed with booking, please type 'book now'.");
         return;
     }
     
-    // Fallback response for other messages
+    // Fallback simple response
     showTypingIndicator();
     setTimeout(() => {
         removeTypingIndicator();
@@ -102,59 +129,7 @@ function sendChatbotMessage() {
     }, 1000);
 }
 
-/* --- Rule-Based AI Planning Flow --- */
-function handleAIMessage(userMessage) {
-    userMessage = userMessage.toLowerCase();
-    
-    if (aiState === "idle") {
-        // Trigger planning if the user asks for wedding advice.
-        if (userMessage.includes("wedding") || userMessage.includes("advice")) {
-            aiState = "collecting";
-            appendChatMessage("Bot", "Sure, I can help plan your wedding. What type of event is it? (e.g., wedding, ring ceremony, birthday)");
-            return;
-        }
-    }
-    
-    if (aiState === "collecting") {
-        if (!planData.eventType) {
-            planData.eventType = userMessage;
-            appendChatMessage("Bot", "Great. How many days of service do you need?");
-            return;
-        }
-        if (!planData.days) {
-            planData.days = userMessage;
-            appendChatMessage("Bot", "What services do you need? (e.g., photography, videography, live streaming, event management, etc.)");
-            return;
-        }
-        if (!planData.services) {
-            planData.services = userMessage;
-            appendChatMessage("Bot", "Could you please provide your Name, Email, and Phone number? (separated by commas)");
-            return;
-        }
-        if (!planData.contact) {
-            // Assume user enters: "John Doe, john@example.com, 1234567890"
-            planData.contact = userMessage;
-            aiState = "complete";
-            const plan = `Based on your input: Event Type: ${planData.eventType}, Duration: ${planData.days} days, Services: ${planData.services}. To proceed with booking, please type "book now".`;
-            appendChatMessage("Bot", plan);
-            return;
-        }
-    }
-    
-    // If planning is complete and user says "book now", show the booking form
-    if (aiState === "complete" && userMessage.includes("book now")) {
-        showBookingForm();
-        aiState = "idle"; // reset for next conversation
-        planData = {};
-        chatHistory = [];
-        return;
-    }
-    
-    // Fallback if input doesn't match any rule
-    appendChatMessage("Bot", "I'm sorry, I didn't understand that. Could you please rephrase?");
-}
-
-/* --- Fallback Simple Response --- */
+// Fallback simple response function
 function getBotResponse(message) {
     const lowerMsg = message.toLowerCase();
     let response = "";
@@ -180,36 +155,22 @@ function getBotResponse(message) {
     appendChatMessage("Bot", response);
 }
 
-/* --- Booking Form Flow --- */
-function showBookingForm() {
-    const messagesDiv = document.getElementById('chatbot-messages');
-    messagesDiv.innerHTML = ""; // Clear messages
-    const formHTML = `
-        <div id="booking-form">
-            <h4>Book Now</h4>
-            <input type="text" id="booking-name" placeholder="Your Name" required><br>
-            <input type="email" id="booking-email" placeholder="Your Email" required><br>
-            <input type="text" id="booking-phone" placeholder="Your Phone" required><br>
-            <input type="text" id="booking-enquiry-for" placeholder="Enquiry For" required><br>
-            <textarea id="booking-message" placeholder="Your Message" required></textarea><br>
-            <button onclick="submitBookingForm()">Send Enquiry</button>
-        </div>
-    `;
-    messagesDiv.innerHTML = formHTML;
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-function submitBookingForm() {
-    const name = document.getElementById('booking-name').value.trim();
-    const email = document.getElementById('booking-email').value.trim();
-    const phone = document.getElementById('booking-phone').value.trim();
-    const enquiryFor = document.getElementById('booking-enquiry-for').value.trim();
-    const message = document.getElementById('booking-message').value.trim();
-    
-    if (!name || !email || !phone || !enquiryFor || !message) {
-        alert("Please fill in all fields.");
+// Function to submit collected plan details directly via SMTP
+function submitPlanEnquiry() {
+    // Parse contact details: expecting "Name, email, phone"
+    let contactParts = planData.contact.split(",");
+    if(contactParts.length < 3) {
+        appendChatMessage("Bot", "The contact details provided seem incomplete. Please try again.");
         return;
     }
+    let name = contactParts[0].trim();
+    let email = contactParts[1].trim();
+    let phone = contactParts[2].trim();
+    
+    // Construct enquiryFor as a combination of eventType, days, and services
+    let enquiryFor = `Event: ${planData.eventType}, Duration: ${planData.days} days, Services: ${planData.services}`;
+    // A simple message summary
+    let message = `Please contact me for the above event.`;
     
     const formData = new FormData();
     formData.append('name', name);
@@ -218,16 +179,19 @@ function submitBookingForm() {
     formData.append('enquiryFor', enquiryFor);
     formData.append('message', message);
     
-    fetch('../includes/send_enquiry.php', {
+    showTypingIndicator();
+    fetch('../includes/send_enquiry_ai.php', {
         method: 'POST',
         body: formData
     })
     .then(r => r.text())
     .then(responseText => {
+        removeTypingIndicator();
         document.getElementById('chatbot-messages').innerHTML = "";
         appendChatMessage("Bot", responseText);
     })
     .catch(error => {
+        removeTypingIndicator();
         appendChatMessage("Bot", "Sorry, there was an error sending your enquiry.");
         console.error(error);
     });
@@ -235,7 +199,7 @@ function submitBookingForm() {
 
 // Allow sending messages with Enter key in the main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
+    if(e.key === "Enter") {
         sendChatbotMessage();
     }
 });
