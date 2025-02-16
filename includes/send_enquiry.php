@@ -4,7 +4,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Adjust path if necessary
+require '../vendor/autoload.php'; // Adjust path if necessary
 
 // Retrieve POST data
 $name = isset($_POST['name']) ? $_POST['name'] : "";
