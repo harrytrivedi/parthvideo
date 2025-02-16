@@ -431,6 +431,10 @@ a:hover {
     color: #ffffff;
     padding: 100px 20px;
     text-align: center;
+    margin-bottom: 0;
+    /* Remove default bottom margin if any */
+    padding-bottom: 20px;
+    /* Slight spacing */
 }
 
 .container1 {
@@ -1023,7 +1027,8 @@ body.events-body .event-cards {
 
 /* Services Section */
 #services {
-    padding: 50px 20px;
+    padding: 30px 20px;
+    /* Reduced from 50px to 30px to fix blank space */
     text-align: center;
     background-color: #000;
     /* match your dark theme */
@@ -1061,12 +1066,14 @@ body.events-body .event-cards {
     padding: 15px;
     flex: 0 0 300px;
     /* Fixed width cards */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border-color: #5e17eb;
+    /* Keep the purple border on hover */
 }
 
 .card img {
