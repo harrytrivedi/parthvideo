@@ -9,20 +9,15 @@ if (!$data || !isset($data['chatHistory'])) {
 }
 
 $chatHistory = $data['chatHistory'];
-
-// Build OpenAI API request
 $openai_api_key = getenv('OPENAI_API_KEY');
 if(!$openai_api_key) {
     echo json_encode(['success' => false, 'reply' => 'No API key set']);
     exit;
 }
 
-// Prepare messages for OpenAI
-// We’ll set a system prompt to instruct the AI about the wedding planning domain
 $messages = [
-    ['role' => 'system', 'content' => "You are a helpful wedding and event planning assistant. Provide suggestions for wedding services, days needed, photography, videography, etc. If the user wants a plan, gather details. Keep answers short and friendly."],
+    ['role' => 'system', 'content' => "You are a helpful wedding and event planning assistant. When a user asks for wedding advice, ask for details such as event type, days needed, services (photography, videography, live streaming, event management, etc.), name, email, and phone, then provide a brief plan and suggest booking our service."],
 ];
-// Merge user/assistant messages from chatHistory
 foreach ($chatHistory as $msg) {
     $messages[] = [
         'role' => $msg['role'],
@@ -30,7 +25,6 @@ foreach ($chatHistory as $msg) {
     ];
 }
 
-// Make the API request
 $payload = json_encode([
     'model' => 'gpt-3.5-turbo',
     'messages' => $messages,
@@ -46,17 +40,9 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Authorization: Bearer ' . $openai_api_key
 ]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Debug logs
-error_log("OPENAI_API_KEY: " . substr($openai_api_key, 0, 5) . "..."); // partial print for safety
-error_log("Payload: " . $payload);
 
 $response = curl_exec($ch);
-if(curl_errno($ch)) {
-    error_log('cURL error: ' . curl_error($ch));
-    echo json_encode(['success' => false, 'reply' => 'Curl error: ' . curl_error($ch)]);
-    exit;
-}
-
+error_log("OpenAI response: " . $response); // Debug log
 if(curl_errno($ch)) {
     echo json_encode(['success' => false, 'reply' => 'Curl error: ' . curl_error($ch)]);
     exit;
@@ -64,9 +50,11 @@ if(curl_errno($ch)) {
 curl_close($ch);
 
 $result = json_decode($response, true);
-if(isset($result['choices'][0]['message']['content'])) {
-    $reply = $result['choices'][0]['message']['content'];
+if (isset($result['choices'][0]['message']['content'])) {
+    $reply = trim($result['choices'][0]['message']['content']);
     echo json_encode(['success' => true, 'reply' => $reply]);
 } else {
+    error_log("OpenAI result structure: " . print_r($result, true)); // Debug structure
     echo json_encode(['success' => false, 'reply' => 'No reply from AI']);
 }
+?>
