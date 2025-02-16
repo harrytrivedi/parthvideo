@@ -46,7 +46,16 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Authorization: Bearer ' . $openai_api_key
 ]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// Debug logs
+error_log("OPENAI_API_KEY: " . substr($openai_api_key, 0, 5) . "..."); // partial print for safety
+error_log("Payload: " . $payload);
+
 $response = curl_exec($ch);
+if(curl_errno($ch)) {
+    error_log('cURL error: ' . curl_error($ch));
+    echo json_encode(['success' => false, 'reply' => 'Curl error: ' . curl_error($ch)]);
+    exit;
+}
 
 if(curl_errno($ch)) {
     echo json_encode(['success' => false, 'reply' => 'Curl error: ' . curl_error($ch)]);
