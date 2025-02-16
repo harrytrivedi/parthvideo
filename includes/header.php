@@ -22,7 +22,7 @@ function isAdmin()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? $pageTitle : "Parth Video"; ?></title>
-    <link rel="stylesheet" href="..//css/stylesheet.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://kit.fontawesome.com/83ff50e3a5.js" crossorigin="anonymous"></script>
     <script src="..//js/script.js"> </script>
@@ -154,13 +154,11 @@ function isAdmin()
 
         <!-- Navigation links -->
         <ul class="nav-links">
-            <li><a href="../user/home.php">Home</a></li>
+            <li><a href="../user/index.php">Home</a></li>
             <li><a href="../user/aboutus.php">About Us</a></li>
             <li><a href="../user/events.php">Services</a></li>
-            <?php if (isLoggedIn()) { ?>
-                <li><a href="../user/members.php">Projects</a></li>
-                <li><a href="../user/devices.php">Clients</a></li>
-            <?php } ?>
+            <li><a href="../user/members.php">Projects</a></li>
+            <li><a href="../user/devices.php">Clients</a></li>
         </ul>
 
         <div class="auth-buttons">
@@ -174,8 +172,8 @@ function isAdmin()
                 echo '</div>';
                 echo '</div>';
             } else {
-                echo '<a href="../user/login.php">Login</a>';
-                echo '<a href="../user/register.php">Register</a>';
+                // echo '<a href="../user/login.php">Login</a>'; closed not required
+                // echo '<a href="../user/register.php">Register</a>';
             }
             ?>
         </div>
