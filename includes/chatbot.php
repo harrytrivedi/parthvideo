@@ -19,13 +19,17 @@
   </div>
 </div>
 
+<!-- Link to your main stylesheet -->
 <link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
 
 <script>
-let isAIPlanning = false;  // Track if user is in AI wedding planning flow
-let planDetails = {};      // Store user details (name, days, services, etc.)
-let chatHistory = [];      // Keep short conversation context for AI
+// Global variables for the chatbot
+let isAIPlanning = false;  // Can be 'idle', 'collecting', or 'complete'
+let aiState = "idle";      // For our rule-based planning flow
+let planData = {};         // Store user-provided plan details
+let chatHistory = [];      // (Optional) For keeping conversation context if needed
 
+// Open and close chatbot window
 function openChatbot() {
     document.getElementById('chatbot-window').style.display = 'flex';
 }
@@ -33,7 +37,7 @@ function closeChatbot() {
     document.getElementById('chatbot-window').style.display = 'none';
 }
 
-// Utility: append message bubble
+// Append a message bubble to the chat window
 function appendChatMessage(sender, message) {
     const messagesDiv = document.getElementById('chatbot-messages');
     const msgDiv = document.createElement('div');
@@ -43,6 +47,7 @@ function appendChatMessage(sender, message) {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
+// Show and remove typing indicator
 function showTypingIndicator() {
     const messagesDiv = document.getElementById('chatbot-messages');
     const typingDiv = document.createElement('div');
@@ -52,10 +57,9 @@ function showTypingIndicator() {
     messagesDiv.appendChild(typingDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
-
 function removeTypingIndicator() {
     const typingDiv = document.getElementById('typing-indicator');
-    if(typingDiv) {
+    if (typingDiv) {
         typingDiv.remove();
     }
 }
@@ -69,28 +73,28 @@ function sendChatbotMessage() {
     appendChatMessage("User", message);
     input.value = "";
     
-    // If user says "book now", show booking form
-    if(message.toLowerCase().includes("book now")) {
+    // If user types "book now", show booking form
+    if (message.toLowerCase().includes("book now")) {
         showBookingForm();
         return;
     }
     
-    // If user is asking for wedding/event advice
-    if(message.toLowerCase().includes("wedding") ||
-       message.toLowerCase().includes("event advice") ||
-       message.toLowerCase().includes("planning")) {
-        isAIPlanning = true;
+    // If user asks for wedding/event advice or planning
+    if (message.toLowerCase().includes("wedding") || 
+        message.toLowerCase().includes("advice") || 
+        message.toLowerCase().includes("planning")) {
+        // Start or continue the rule-based AI planning flow
         handleAIMessage(message);
         return;
     }
     
-    // If already in AI planning flow, continue it
-    if(isAIPlanning) {
+    // If already in planning flow, continue it
+    if (aiState !== "idle") {
         handleAIMessage(message);
         return;
     }
     
-    // Otherwise, fallback simple response
+    // Fallback response for other messages
     showTypingIndicator();
     setTimeout(() => {
         removeTypingIndicator();
@@ -98,56 +102,77 @@ function sendChatbotMessage() {
     }, 1000);
 }
 
-// AI Flow: now using AIMLAPI endpoint
+/* --- Rule-Based AI Planning Flow --- */
 function handleAIMessage(userMessage) {
-    showTypingIndicator();
+    userMessage = userMessage.toLowerCase();
     
-    // Add user message to chat history
-    chatHistory.push({role: 'user', content: userMessage});
-    
-    fetch('../includes/ai_chat_aimlapi.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatHistory })
-    })
-    .then(res => res.json())
-    .then(data => {
-        removeTypingIndicator();
-        if(data.success) {
-            const reply = data.reply;
-            appendChatMessage("Bot", reply);
-            chatHistory.push({role: 'assistant', content: reply});
-        } else {
-            // Fallback message if AIMLAPI doesn't return a valid reply
-            appendChatMessage("Bot", "I'm sorry, I couldn't process your wedding advice request right now.");
+    if (aiState === "idle") {
+        // Trigger planning if the user asks for wedding advice.
+        if (userMessage.includes("wedding") || userMessage.includes("advice")) {
+            aiState = "collecting";
+            appendChatMessage("Bot", "Sure, I can help plan your wedding. What type of event is it? (e.g., wedding, ring ceremony, birthday)");
+            return;
         }
-    })
-    .catch(err => {
-        removeTypingIndicator();
-        appendChatMessage("Bot", "Error contacting AI service. Please try again later.");
-        console.error(err);
-    });
+    }
+    
+    if (aiState === "collecting") {
+        if (!planData.eventType) {
+            planData.eventType = userMessage;
+            appendChatMessage("Bot", "Great. How many days of service do you need?");
+            return;
+        }
+        if (!planData.days) {
+            planData.days = userMessage;
+            appendChatMessage("Bot", "What services do you need? (e.g., photography, videography, live streaming, event management, etc.)");
+            return;
+        }
+        if (!planData.services) {
+            planData.services = userMessage;
+            appendChatMessage("Bot", "Could you please provide your Name, Email, and Phone number? (separated by commas)");
+            return;
+        }
+        if (!planData.contact) {
+            // Assume user enters: "John Doe, john@example.com, 1234567890"
+            planData.contact = userMessage;
+            aiState = "complete";
+            const plan = `Based on your input: Event Type: ${planData.eventType}, Duration: ${planData.days} days, Services: ${planData.services}. To proceed with booking, please type "book now".`;
+            appendChatMessage("Bot", plan);
+            return;
+        }
+    }
+    
+    // If planning is complete and user says "book now", show the booking form
+    if (aiState === "complete" && userMessage.includes("book now")) {
+        showBookingForm();
+        aiState = "idle"; // reset for next conversation
+        planData = {};
+        chatHistory = [];
+        return;
+    }
+    
+    // Fallback if input doesn't match any rule
+    appendChatMessage("Bot", "I'm sorry, I didn't understand that. Could you please rephrase?");
 }
 
-// Fallback getBotResponse for simple keywords
+/* --- Fallback Simple Response --- */
 function getBotResponse(message) {
     const lowerMsg = message.toLowerCase();
     let response = "";
-    if(lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
+    if (lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
         response = "Hello! How can I help you today?";
-    } else if(lowerMsg.includes("service")) {
+    } else if (lowerMsg.includes("service")) {
         fetch('../includes/services_summary.php')
             .then(r => r.text())
             .then(txt => appendChatMessage("Bot", txt))
             .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch services info."));
         return;
-    } else if(lowerMsg.includes("about") || lowerMsg.includes("history")) {
+    } else if (lowerMsg.includes("about") || lowerMsg.includes("history")) {
         fetch('../includes/aboutus_summary.php')
             .then(r => r.text())
             .then(txt => appendChatMessage("Bot", txt))
             .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch about us info."));
         return;
-    } else if(lowerMsg.includes("price")) {
+    } else if (lowerMsg.includes("price")) {
         response = "You can find our pricing details on our pricing page.";
     } else {
         response = "I'm sorry, I didn't understand that. Could you please rephrase?";
@@ -155,7 +180,7 @@ function getBotResponse(message) {
     appendChatMessage("Bot", response);
 }
 
-// Display booking form inside chat window
+/* --- Booking Form Flow --- */
 function showBookingForm() {
     const messagesDiv = document.getElementById('chatbot-messages');
     messagesDiv.innerHTML = ""; // Clear messages
@@ -174,7 +199,6 @@ function showBookingForm() {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Submit the booking form via AJAX to send an email
 function submitBookingForm() {
     const name = document.getElementById('booking-name').value.trim();
     const email = document.getElementById('booking-email').value.trim();
@@ -182,7 +206,7 @@ function submitBookingForm() {
     const enquiryFor = document.getElementById('booking-enquiry-for').value.trim();
     const message = document.getElementById('booking-message').value.trim();
     
-    if(!name || !email || !phone || !enquiryFor || !message) {
+    if (!name || !email || !phone || !enquiryFor || !message) {
         alert("Please fill in all fields.");
         return;
     }
@@ -209,9 +233,9 @@ function submitBookingForm() {
     });
 }
 
-// Allow sending message with Enter key in the main input
+// Allow sending messages with Enter key in the main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
-    if(e.key === "Enter") {
+    if (e.key === "Enter") {
         sendChatbotMessage();
     }
 });
