@@ -24,9 +24,9 @@
 
 <script>
 // Global variables for the chatbot planning flow
-let aiState = "idle";      // 'idle', 'collecting', or 'complete'
-let planData = {};         // To store user input: eventType, days, services, contact
-let chatHistory = [];      // Optional conversation context
+let aiState = "idle";      // Possible values: 'idle', 'collecting', 'complete'
+let planData = {};         // To store details: eventType, days, services, contact
+let chatHistory = [];      // For conversation context
 
 // Open and close chatbot window
 function openChatbot() {
@@ -72,7 +72,7 @@ function sendChatbotMessage() {
     appendChatMessage("User", message);
     input.value = "";
     
-    // If user types "book now" while planning is complete, submit enquiry directly
+    // If user types "book now" while planning is complete, submit the enquiry directly
     if (aiState === "complete" && message.toLowerCase().includes("book now")) {
         submitPlanEnquiry();
         aiState = "idle"; // Reset for next conversation
@@ -81,47 +81,45 @@ function sendChatbotMessage() {
         return;
     }
     
-    // If user asks for wedding/event advice and planning hasn't started
+    // Start wedding planning flow using Hugging Face if user mentions wedding/advice
     if (aiState === "idle" && (message.toLowerCase().includes("wedding") || message.toLowerCase().includes("advice"))) {
         aiState = "collecting";
         appendChatMessage("Bot", "Sure, I can help plan your wedding. What type of event is it? (e.g., wedding, ring ceremony, birthday)");
+        chatHistory.push({role: 'user', content: message});
         return;
     }
     
-    // If in planning flow, continue collecting details
-    if (aiState === "collecting") {
-        if (!planData.eventType) {
-            planData.eventType = message;
-            appendChatMessage("Bot", "Great. How many days of service do you need?");
-            return;
-        }
-        if (!planData.days) {
-            planData.days = message;
-            appendChatMessage("Bot", "What services do you need? (e.g., photography, videography, live streaming, event management, etc.)");
-            return;
-        }
-        if (!planData.services) {
-            planData.services = message;
-            appendChatMessage("Bot", "Could you please provide your Name, Email, and Phone number? (separated by commas)");
-            return;
-        }
-        if (!planData.contact) {
-            // Expect input like: "John Doe, john@example.com, 1234567890"
-            planData.contact = message;
-            aiState = "complete";
-            const plan = `Plan Summary:\nEvent: ${planData.eventType}\nDuration: ${planData.days} days\nServices: ${planData.services}\nContact: ${planData.contact}\n\nIf you'd like to proceed, please type "book now".`;
-            appendChatMessage("Bot", plan);
-            return;
-        }
-    }
-    
-    // If planning is complete but user doesn't say "book now", remind them
-    if (aiState === "complete") {
-        appendChatMessage("Bot", "If you'd like to proceed with booking, please type 'book now'.");
+    // If in planning flow, continue collecting details using Hugging Face AI
+    if (aiState !== "idle") {
+        // Add user message to chat history
+        chatHistory.push({role: 'user', content: message});
+        // Use Hugging Face Inference API endpoint (ai_chat_hf.php)
+        showTypingIndicator();
+        fetch('../includes/ai_chat_hf.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chatHistory })
+        })
+        .then(res => res.json())
+        .then(data => {
+            removeTypingIndicator();
+            if(data.success) {
+                const reply = data.reply;
+                appendChatMessage("Bot", reply);
+                chatHistory.push({role: 'assistant', content: reply});
+            } else {
+                appendChatMessage("Bot", "Sorry, I couldn't process your wedding planning request right now.");
+            }
+        })
+        .catch(err => {
+            removeTypingIndicator();
+            appendChatMessage("Bot", "Error contacting AI service. Please try again later.");
+            console.error(err);
+        });
         return;
     }
     
-    // Fallback simple response
+    // Fallback simple response for non-planning messages
     showTypingIndicator();
     setTimeout(() => {
         removeTypingIndicator();
@@ -158,8 +156,8 @@ function getBotResponse(message) {
 // Function to submit collected plan details directly via SMTP
 function submitPlanEnquiry() {
     // Parse contact details: expecting "Name, email, phone"
-    let contactParts = planData.contact.split(",");
-    if(contactParts.length < 3) {
+    let contactParts = planData.contact ? planData.contact.split(",") : [];
+    if (contactParts.length < 3) {
         appendChatMessage("Bot", "The contact details provided seem incomplete. Please try again.");
         return;
     }
@@ -167,9 +165,8 @@ function submitPlanEnquiry() {
     let email = contactParts[1].trim();
     let phone = contactParts[2].trim();
     
-    // Construct enquiryFor as a combination of eventType, days, and services
+    // Construct enquiryFor from planData collected during AI planning
     let enquiryFor = `Event: ${planData.eventType}, Duration: ${planData.days} days, Services: ${planData.services}`;
-    // A simple message summary
     let message = `Please contact me for the above event.`;
     
     const formData = new FormData();
@@ -199,7 +196,7 @@ function submitPlanEnquiry() {
 
 // Allow sending messages with Enter key in the main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
-    if(e.key === "Enter") {
+    if (e.key === "Enter") {
         sendChatbotMessage();
     }
 });

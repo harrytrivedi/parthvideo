@@ -501,7 +501,7 @@ a:hover {
 .cta-button:hover {
     text-decoration: none;
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color: black;
+    color:white;    
 }
 
 /* Media query for smaller devices */
@@ -878,8 +878,7 @@ body.events-body .event-cards {
     right: 20px;
     width: 320px;
     height: 420px;
-    background: #222;
-    /* Dark background */
+    background: #0000008c;
     border: 2px solid #5e17eb;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -1176,7 +1175,7 @@ body.events-body .event-cards {
 
 .card-btn:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color: #000;
+    color: white;
 }
 
 /* Carousel Buttons */

@@ -83,7 +83,7 @@ include_once '../includes/header.php';
 
 .book-now-container input[type="submit"]:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color: #000;
+    color: white;
 }
 </style>
 

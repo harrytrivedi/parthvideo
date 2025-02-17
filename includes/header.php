@@ -139,8 +139,8 @@ function isAdmin()
         <ul class="nav-links">
             <li><a href="../user/index.php">Home</a></li>
             <li><a href="../user/aboutus.php">About Us</a></li>
-            <li><a href="../user/events.php">Services</a></li>
-            <li><a href="../user/members.php">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="../user/devices.php">Clients</a></li>
         </ul>
 
