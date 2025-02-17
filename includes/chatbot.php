@@ -194,6 +194,85 @@ function submitPlanEnquiry() {
     });
 }
 
+function handleAIMessage(userMessage) {
+    userMessage = userMessage.toLowerCase();
+
+    if (aiState === "idle") {
+        if (userMessage.includes("wedding") || userMessage.includes("advice")) {
+            aiState = "collecting";
+            appendChatMessage("Bot", "Sure, I can help plan your wedding. What type of event is it? (e.g., wedding, ring ceremony, birthday)");
+            return;
+        }
+    }
+
+    if (aiState === "collecting") {
+        if (!planData.eventType) {
+            planData.eventType = userMessage;
+            appendChatMessage("Bot", "Great. How many days of service do you need?");
+            return;
+        }
+        if (!planData.days) {
+            planData.days = userMessage;
+            appendChatMessage("Bot", "What services do you need? (e.g., photography, videography, live streaming, event management, etc.)");
+            return;
+        }
+        if (!planData.services) {
+            planData.services = userMessage;
+            appendChatMessage("Bot", "Could you please provide your Name, Email, and Phone number? (separated by commas)");
+            return;
+        }
+        if (!planData.contact) {
+            planData.contact = userMessage;
+            aiState = "complete";
+            const plan = `Plan Summary:\nEvent: ${planData.eventType}\nDuration: ${planData.days} days\nServices: ${planData.services}\nContact: ${planData.contact}\n\nIf you'd like to proceed, please type "book now".`;
+            appendChatMessage("Bot", plan);
+            // Reset chatHistory here if desired
+            chatHistory = [];
+            return;
+        }
+    }
+
+    if (aiState === "complete" && userMessage.includes("book now")) {
+        submitPlanEnquiry();
+        aiState = "idle";
+        planData = {};
+        chatHistory = [];
+        return;
+    }
+
+    // If in complete state but input isn't clear, ask for clarification
+    if (aiState === "complete") {
+        appendChatMessage("Bot", "If you'd like to proceed with booking, please type 'book now', or provide additional details if needed.");
+        return;
+    }
+
+    // Otherwise, use the Hugging Face AI for dynamic responses
+    chatHistory.push({ role: 'user', content: userMessage });
+    showTypingIndicator();
+    fetch('../includes/ai_chat_hf.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chatHistory })
+    })
+    .then(res => res.json())
+    .then(data => {
+        removeTypingIndicator();
+        if (data.success) {
+            const reply = data.reply;
+            appendChatMessage("Bot", reply);
+            chatHistory.push({ role: 'assistant', content: reply });
+        } else {
+            appendChatMessage("Bot", "Sorry, I couldn't process your wedding planning request right now.");
+        }
+    })
+    .catch(err => {
+        removeTypingIndicator();
+        appendChatMessage("Bot", "Error contacting AI service. Please try again later.");
+        console.error(err);
+    });
+}
+
+
 // Allow sending messages with Enter key in the main input
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
