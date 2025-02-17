@@ -2,8 +2,27 @@
 $pageTitle = "Parth Video - Home";
 include_once '../includes/header.php';
 ?>
+<head>
+    <!-- Favicon -->
+    <link rel="icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+</head>
+<!-- Inline animation styles -->
+<style>
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 
-<div class="hero-section">
+<!-- Hero Section -->
+<div class="hero-section fade-in">
     <div class="container1">
         <h1>Welcome to <span> Parth Video! </span></h1>
         <p>Turning your precious moments into timeless memories.</p>
@@ -13,7 +32,7 @@ include_once '../includes/header.php';
 </div>
 
 <!-- Services Section -->
-<section id="services">
+<section id="services" class="fade-in">
     <h2 class="section-title">Our Services</h2>
     <div class="carousel-container">
         <!-- Give buttons unique IDs -->
@@ -87,8 +106,8 @@ include_once '../includes/header.php';
     </div>
 </section>
 
-<!-- Optional Gallery Section (if needed) -->
-<section id="gallery">
+<!-- Gallery Section -->
+<section id="gallery" class="fade-in">
     <h2 class="section-title">Gallery</h2>
     <div class="gallery-grid">
         <img src="../user/images/image12.jpeg" alt="Gallery Image 1">
@@ -104,45 +123,57 @@ include_once '../includes/header.php';
 <!-- Footer -->
 <?php include_once '../includes/footer.php'; ?>
 
+<!-- Inline JS for animations and carousel -->
 <script>
-// Minimal carousel functionality for the services section
-let currentIndex = 0;
-const carousel = document.querySelector('.carousel');
-const cards = document.querySelectorAll('.carousel .card');
-const cardWidth = cards.length ? (cards[0].offsetWidth + 20) : 320; // card width + margin fallback
+  // Intersection Observer to add "visible" class to elements when scrolled into view
+  const observerOptions = {
+    threshold: 0.2
+  };
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Optionally unobserve if you want animation only once:
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all elements with the fade-in class
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+  
+  // Minimal carousel functionality for the services section
+  let currentIndex = 0;
+  const carousel = document.querySelector('.carousel');
+  const cards = document.querySelectorAll('.carousel .card');
+  const cardWidth = cards.length ? (cards[0].offsetWidth + 20) : 320; // card width + margin fallback
 
-// Identify the next/prev buttons by ID
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+  // Identify the next/prev buttons by ID
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-// Initialize button states
-checkButtons();
+  // Initialize button states
+  checkButtons();
 
-function moveCarousel(direction) {
-    currentIndex += direction;
-    // Limit currentIndex to a valid range
-    if (currentIndex < 0) currentIndex = 0;
-    if (currentIndex > cards.length - 1) currentIndex = cards.length - 1;
-    carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    checkButtons();
-}
+  function moveCarousel(direction) {
+      currentIndex += direction;
+      // Clamp currentIndex between 0 and last card index
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex > cards.length - 1) currentIndex = cards.length - 1;
+      carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      checkButtons();
+  }
 
-function checkButtons() {
-    // Hide prev button if at first card
-    if (currentIndex === 0) {
-        prevBtn.style.display = 'none';
-    } else {
-        prevBtn.style.display = 'block';
-    }
-    // Hide next button if at last card
-    if (currentIndex === cards.length - 1) {
-        nextBtn.style.display = 'none';
-    } else {
-        nextBtn.style.display = 'block';
-    }
-}
+  function checkButtons() {
+      prevBtn.style.display = (currentIndex === 0) ? 'none' : 'block';
+      nextBtn.style.display = (currentIndex === cards.length - 1) ? 'none' : 'block';
+  }
 </script>
 
+<!-- Existing external script (if needed) -->
 <script src="../js/script.js"></script>
 </body>
 </html>

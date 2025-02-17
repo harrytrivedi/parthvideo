@@ -2,7 +2,11 @@
 $pageTitle = "Book Now - Parth Video";
 include_once '../includes/header.php';
 ?>
-
+<head>
+    <!-- Favicon -->
+    <link rel="icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+</head>
 <style>
 
 .booknow-bg {
@@ -83,7 +87,7 @@ include_once '../includes/header.php';
 
 .book-now-container input[type="submit"]:hover {
     background: linear-gradient(to right, #5e17eb, #5ecfff, #5e17eb);
-    color: #000;
+    color: white;
 }
 </style>
 
