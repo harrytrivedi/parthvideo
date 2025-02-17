@@ -2,7 +2,11 @@
 $pageTitle = "Parth Video - Home";
 include_once '../includes/header.php';
 ?>
-
+<head>
+    <!-- Favicon -->
+    <link rel="icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../user/images/logo-dark.ico" type="image/x-icon">
+</head>
 <!-- Inline animation styles -->
 <style>
   /* Fade-in animation */
