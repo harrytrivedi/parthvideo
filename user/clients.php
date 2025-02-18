@@ -97,33 +97,33 @@ include_once '../includes/header.php';
     // Manually defined reviews array – adjust as needed
     $reviews = [
       [
-        "author" => "Akash Yadav",
+        "author" => "anonymous",
         "rating" => 5,
-        "comment" => "", // No comment provided, we skip it (or display "No comment provided" if desired)
+        "comment" => "Parth Video helped us organise our event very well and made our job really easy", // No comment provided, we skip it (or display "No comment provided" if desired)
         "date" => "27 Jan 2022"
       ],
       [
         "author" => "Raval Royal",
         "rating" => 5,
-        "comment" => "", 
+        "comment" => "Really great job, he brings his whole team even if its diffrent cities or if you have destination wedding planned. No compromise on quality! loved the work", 
         "date" => "4 Mar 2020"
       ],
       [
         "author" => "Pankaj Raval",
         "rating" => 5,
-        "comment" => "",
+        "comment" => "Excellent work",
         "date" => "4 Mar 2020"
       ],
       [
-        "author" => "Vicky Pandya",
+        "author" => "anonymous",
         "rating" => 5,
-        "comment" => "",
+        "comment" => "did amazing work! quality work",
         "date" => "4 Mar 2020"
       ],
       [
-        "author" => "raj trivedi",
+        "author" => "anonymous",
         "rating" => 5,
-        "comment" => "",
+        "comment" => "He did best job with our wedding",
         "date" => "4 Mar 2020"
       ],
       [
