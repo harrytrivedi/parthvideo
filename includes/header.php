@@ -141,7 +141,7 @@ function isAdmin()
             <li><a href="../user/aboutus.php">About Us</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="../user/devices.php">Clients</a></li>
+            <li><a href="../user/clients.php">Clients</a></li>
         </ul>
 
         <div class="auth-buttons">
