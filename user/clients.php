@@ -25,10 +25,7 @@ include_once '../includes/header.php';
       font-size: 36px;
       text-align: center;
       margin-bottom: 40px;
-      background: #5e17eb;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: white;
     }
     /* Chat-like testimonial list */
     .testimonial {
@@ -59,7 +56,7 @@ include_once '../includes/header.php';
     }
     /* Chat bubble for review text */
     .bubble {
-      background-color: #222;
+      background-color: #0000008c;
       padding: 15px;
       border-radius: 15px;
       position: relative;

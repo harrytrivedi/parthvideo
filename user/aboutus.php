@@ -16,6 +16,7 @@ include_once '../includes/header.php';
       margin: 0;
       padding: 0;
       overflow-x: hidden;
+      background-image: url(../user/images/aboutus.jpg)
     }
     h1, h2, h3, p {
       margin: 0 0 20px 0;
@@ -45,10 +46,9 @@ include_once '../includes/header.php';
     .about-header h1 {
       font-size: 48px;
       font-weight: bolder;
-      background: #5e17eb;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
     }
     .about-header p {
       font-size: 20px;
@@ -75,7 +75,7 @@ include_once '../includes/header.php';
       position: relative;
       width: 45%;
       padding: 20px;
-      background: #222;
+      background: #0000008c;
       border: 1px solid #5e17eb;
       border-radius: 10px;
       margin: 20px 0;
@@ -134,10 +134,7 @@ include_once '../includes/header.php';
     .founders-title {
       font-size: 36px;
       margin-bottom: 40px;
-      background: #5e17eb;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: white;
     }
     .founder-cards {
       display: flex;
@@ -146,7 +143,7 @@ include_once '../includes/header.php';
       gap: 30px;
     }
     .founder-card {
-      background: #222;
+      background: #0000008c;
       border: 2px solid #5e17eb;
       border-radius: 10px;
       padding: 20px;
@@ -176,15 +173,19 @@ include_once '../includes/header.php';
       font-size: 22px;
       font-weight: bold;
       margin-bottom: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
     }
     .founder-role {
       font-size: 18px;
-      color: #5ecfff;
+      color: #5e17eb;
       margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
     }
     .founder-bio {
       font-size: 16px;
       line-height: 1.4;
+      font-family: 'Poppins', sans-serif;
     }
 
     /* Responsive */
@@ -244,7 +245,7 @@ include_once '../includes/header.php';
     <div class="founder-cards">
       <!-- Founder Card 1 -->
       <div class="founder-card">
-        <div class="founder-photo" style="background-image: url('../user/images/founder1.jpg');">
+        <div class="founder-photo" style="background-image: url('../user/images/bhavesh_ceo.png');">
           <!-- Replace with actual image -->
         </div>
         <div class="founder-name">Bhavesh Trivedi</div>
@@ -255,7 +256,7 @@ include_once '../includes/header.php';
       </div>
       <!-- Founder Card 2 -->
       <div class="founder-card">
-        <div class="founder-photo" style="background-image: url('../user/images/founder2.jpg');">
+        <div class="founder-photo" style="background-image: url('../user/images/harsh.jpeg');">
           <!-- Replace with actual image -->
         </div>
         <div class="founder-name">Harsh Trivedi</div>
