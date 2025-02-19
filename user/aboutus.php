@@ -16,7 +16,8 @@ include_once '../includes/header.php';
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      background-image: url(../user/images/aboutus.jpg)
+      background-image: url(../user/images/aboutus2.jpg);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
     }
     h1, h2, h3, p {
       margin: 0 0 20px 0;
@@ -187,6 +188,12 @@ include_once '../includes/header.php';
       line-height: 1.4;
       font-family: 'Poppins', sans-serif;
     }
+    .section-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
 
     /* Responsive */
     @media screen and (max-width: 768px) {
