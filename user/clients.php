@@ -14,6 +14,7 @@ include_once '../includes/header.php';
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
+      background-image: url(../user/images/clientBG.jpg);
     }
     .testimonial-container {
       max-width: 800px;
