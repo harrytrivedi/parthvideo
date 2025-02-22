@@ -53,3 +53,10 @@ CREATE TABLE users (
     level INTEGER DEFAULT 0
 );
 
+
+sink 400
+shower 79
+exposed 
+
+
+02087347219 Avinash
