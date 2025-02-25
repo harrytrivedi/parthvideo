@@ -4,9 +4,10 @@ include_once '../includes/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <!-- Added meta viewport for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
     <style>
         /* General Styles */
@@ -18,12 +19,11 @@ include_once '../includes/header.php';
             padding: 0;
             overflow-x: hidden;
             background-image: url(../user/images/aboutus2.jpg);
+            background-size: cover;
+            background-position: center;
         }
 
-        h1,
-        h2,
-        h3,
-        p {
+        h1, h2, h3, p {
             margin: 0 0 20px 0;
             padding: 0;
         }
@@ -54,10 +54,8 @@ include_once '../includes/header.php';
 
         .about-header h1 {
             font-size: 48px;
-            font-weight: bolder;
-            color: white;
-            font-family: 'Poppins', sans-serif;
             font-weight: bold;
+            color: white;
         }
 
         .about-header p {
@@ -200,52 +198,55 @@ include_once '../includes/header.php';
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
         }
 
         .founder-role {
             font-size: 18px;
             color: #5e17eb;
             margin-bottom: 10px;
-            font-family: 'Poppins', sans-serif;
         }
 
         .founder-bio {
             font-size: 16px;
             line-height: 1.4;
-            font-family: 'Poppins', sans-serif;
         }
 
         .section-title {
             font-size: 32px;
             margin-bottom: 20px;
             color: white;
-            font-family: "Poppins", sans-serif;
         }
 
-        /* Responsive */
+        /* Responsive Styles */
         @media screen and (max-width: 768px) {
             .founder-cards {
                 flex-direction: column;
                 align-items: center;
             }
-
             .timeline-item.left,
             .timeline-item.right {
                 width: 90%;
                 margin: 20px auto;
                 text-align: left;
             }
-
             .timeline-container::before {
                 left: 5%;
                 transform: none;
             }
         }
+        @media screen and (max-width: 480px) {
+            .about-header h1 {
+                font-size: 36px;
+            }
+            .about-header p {
+                font-size: 16px;
+            }
+            .founder-card {
+                width: 90%;
+            }
+        }
     </style>
 </head>
-
 <body>
     <!-- Header Section -->
     <section class="about-header fade-in">
@@ -284,9 +285,7 @@ include_once '../includes/header.php';
         <div class="founder-cards">
             <!-- Founder Card 1 -->
             <div class="founder-card">
-                <div class="founder-photo" style="background-image: url('../user/images/bhavesh_ceo.png');">
-                    <!-- Replace with actual image -->
-                </div>
+                <div class="founder-photo" style="background-image: url('../user/images/bhavesh_ceo.png');"></div>
                 <div class="founder-name">Bhavesh Trivedi</div>
                 <div class="founder-role">Founder, Parth Video</div>
                 <div class="founder-bio">
@@ -295,9 +294,7 @@ include_once '../includes/header.php';
             </div>
             <!-- Founder Card 2 -->
             <div class="founder-card">
-                <div class="founder-photo" style="background-image: url('../user/images/harsh.jpeg');">
-                    <!-- Replace with actual image -->
-                </div>
+                <div class="founder-photo" style="background-image: url('../user/images/harsh.jpeg');"></div>
                 <div class="founder-name">Harsh Trivedi</div>
                 <div class="founder-role">CEO, Parth Video</div>
                 <div class="founder-bio">
@@ -329,5 +326,4 @@ include_once '../includes/header.php';
         fadeElements.forEach(el => observer.observe(el));
     </script>
 </body>
-
 </html>
