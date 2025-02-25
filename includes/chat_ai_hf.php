@@ -8,7 +8,7 @@ if (!$api_token) {
     exit;
 }
 
-$model_id = 'microsoft/DialoGPT-medium'; // Chosen model ID.
+$model_id = 'microsoft/DialoGPT-medium';
 $api_url = "https://api-inference.huggingface.co/models/$model_id";
 
 // Retrieve the user message from POST.
@@ -19,16 +19,15 @@ if (empty($user_message)) {
     exit;
 }
 
-// Refined prompt that instructs the model to provide a direct answer without repeating instructions.
-$prompt = "You are a wedding planner expert. Answer the following question directly without including any introductory or instructional text.\nQuestion: \"$user_message\"\nAnswer:";
+// New, simpler prompt that instructs the model to answer directly.
+$prompt = "You are a wedding planner expert. Provide a succinct, direct answer to the following question without repeating any context.\nQ: \"$user_message\"\nA:";
 
 // Build the data payload including generation parameters.
 $data = json_encode([
     'inputs' => $prompt,
     'parameters' => [
-        'max_new_tokens' => 100,
-        'temperature' => 0.7,
-        'stop' => ["\nQuestion:"]
+        'max_new_tokens' => 150,
+        'temperature' => 0.5
     ]
 ]);
 
@@ -56,19 +55,18 @@ curl_close($ch);
 $decoded = json_decode($response, true);
 $generated_text = "";
 
-// Extract the generated text (assuming the response structure includes 'generated_text').
 if (isset($decoded[0]['generated_text'])) {
     $generated_text = $decoded[0]['generated_text'];
-    // Remove any text before the first occurrence of "Answer:" to keep only the direct answer.
-    $parts = explode("Answer:", $generated_text);
-    if (count($parts) > 1) {
-        $direct_answer = trim($parts[1]);
+    // Remove everything before the "A:" delimiter to keep only the answer.
+    $parts = explode("A:", $generated_text, 2);
+    if (count($parts) == 2) {
+        $answer = trim($parts[1]);
     } else {
-        $direct_answer = trim($generated_text);
+        $answer = trim($generated_text);
     }
-    echo json_encode(['generated_text' => $direct_answer]);
+    echo json_encode(['generated_text' => $answer]);
 } else {
-    // If the response structure is different, output the raw response.
+    // Return raw response if structure is unexpected.
     echo $response;
 }
 ?>
