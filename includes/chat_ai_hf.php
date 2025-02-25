@@ -21,7 +21,8 @@ if (empty($user_message)) {
 }
 
 // Craft a prompt with wedding planning context.
-$prompt = "You are a wedding planner expert. Provide helpful, detailed advice for this query: \"$user_message\"";
+$prompt = "You are a wedding planner expert. Provide detailed and creative wedding planning advice.\nQuery: \"$user_message\"\nAnswer:";
+
 
 $data = json_encode([
     'inputs' => $prompt
