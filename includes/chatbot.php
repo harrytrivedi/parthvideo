@@ -52,7 +52,7 @@ function showTypingIndicator() {
     const typingDiv = document.createElement('div');
     typingDiv.classList.add('chat-message', 'bot', 'typing');
     typingDiv.id = 'typing-indicator';
-    typingDiv.innerHTML = "<em>Parth Video is typing...</em>";
+    typingDiv.innerHTML = "<em>Wedding Planner is typing...</em>";
     messagesDiv.appendChild(typingDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
@@ -121,38 +121,36 @@ function sendChatbotMessage() {
         return;
     }
     
-    // Fallback simple response
-    showTypingIndicator();
-    setTimeout(() => {
-        removeTypingIndicator();
-        getBotResponse(message);
-    }, 1000);
+    // Fallback: Use Hugging Face AI for general conversation.
+    getHFAiResponse(message);
 }
 
-// Fallback simple response function
-function getBotResponse(message) {
-    const lowerMsg = message.toLowerCase();
-    let response = "";
-    if (lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
-        response = "Hello! How can I help you today?";
-    } else if (lowerMsg.includes("service")) {
-        fetch('../includes/services_summary.php')
-            .then(r => r.text())
-            .then(txt => appendChatMessage("Bot", txt))
-            .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch services info."));
-        return;
-    } else if (lowerMsg.includes("about") || lowerMsg.includes("history")) {
-        fetch('../includes/aboutus_summary.php')
-            .then(r => r.text())
-            .then(txt => appendChatMessage("Bot", txt))
-            .catch(() => appendChatMessage("Bot", "Sorry, I couldn't fetch about us info."));
-        return;
-    } else if (lowerMsg.includes("price")) {
-        response = "You can find our pricing details on our pricing page.";
-    } else {
-        response = "I'm sorry, I didn't understand that. Could you please rephrase?";
-    }
-    appendChatMessage("Bot", response);
+// Function to send the user message to Hugging Face API via chat_ai_hf.php
+function getHFAiResponse(message) {
+    showTypingIndicator();
+    const formData = new FormData();
+    formData.append('message', message);
+    
+    fetch('chat_ai_hf.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        removeTypingIndicator();
+        if (data.error) {
+            appendChatMessage("Bot", "There was an error: " + data.error);
+        } else {
+            // Depending on the response format, adjust how you extract the reply.
+            let reply = (data[0] && data[0].generated_text) ? data[0].generated_text : "Sorry, I didn't get a proper response.";
+            appendChatMessage("Bot", reply);
+        }
+    })
+    .catch(error => {
+        removeTypingIndicator();
+        appendChatMessage("Bot", "Sorry, something went wrong while contacting the AI.");
+        console.error(error);
+    });
 }
 
 // Function to submit collected plan details directly via SMTP
@@ -167,9 +165,7 @@ function submitPlanEnquiry() {
     let email = contactParts[1].trim();
     let phone = contactParts[2].trim();
     
-    // Construct enquiryFor as a combination of eventType, days, and services
     let enquiryFor = `Event: ${planData.eventType}, Duration: ${planData.days} days, Services: ${planData.services}`;
-    // A simple message summary
     let message = `Please contact me for the above event.`;
     
     const formData = new FormData();
@@ -197,7 +193,7 @@ function submitPlanEnquiry() {
     });
 }
 
-// Allow sending messages with Enter key in the main input
+// Allow sending messages with Enter key
 document.getElementById('chatbot-input').addEventListener("keypress", function(e) {
     if(e.key === "Enter") {
         sendChatbotMessage();
