@@ -20,12 +20,18 @@ if (empty($user_message)) {
     exit;
 }
 
-// Craft a prompt with wedding planning context.
+// Craft a refined prompt with a clear delimiter for the answer.
+// This tells the model that the answer should come after "Answer:" and stop if it sees "\nQuery:".
 $prompt = "You are a wedding planner expert. Provide detailed and creative wedding planning advice.\nQuery: \"$user_message\"\nAnswer:";
 
-
+// Build the data payload including generation parameters.
 $data = json_encode([
-    'inputs' => $prompt
+    'inputs' => $prompt,
+    'parameters' => [
+        'max_new_tokens' => 100,
+        'temperature' => 0.7,
+        'stop' => ["\nQuery:"]
+    ]
 ]);
 
 // Initialize the cURL request.
