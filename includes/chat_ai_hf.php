@@ -2,7 +2,6 @@
 // chat_ai_hf.php
 
 // Load the Hugging Face API token from an environment variable.
-// Make sure you set HF_API_TOKEN in your server's environment configuration.
 $api_token = getenv('HF_API_TOKEN');
 if (!$api_token) {
     echo json_encode(['error' => 'API token not set']);
@@ -20,9 +19,8 @@ if (empty($user_message)) {
     exit;
 }
 
-// Craft a refined prompt with a clear delimiter for the answer.
-// This tells the model that the answer should come after "Answer:" and stop if it sees "\nQuery:".
-$prompt = "You are a wedding planner expert. Provide detailed and creative wedding planning advice.\nQuery: \"$user_message\"\nAnswer:";
+// Refined prompt that instructs the model to provide a direct answer without repeating instructions.
+$prompt = "You are a wedding planner expert. Answer the following question directly without including any introductory or instructional text.\nQuestion: \"$user_message\"\nAnswer:";
 
 // Build the data payload including generation parameters.
 $data = json_encode([
@@ -30,7 +28,7 @@ $data = json_encode([
     'parameters' => [
         'max_new_tokens' => 100,
         'temperature' => 0.7,
-        'stop' => ["\nQuery:"]
+        'stop' => ["\nQuestion:"]
     ]
 ]);
 
@@ -49,10 +47,28 @@ $response = curl_exec($ch);
 
 if (curl_errno($ch)) {
     echo json_encode(['error' => curl_error($ch)]);
+    curl_close($ch);
+    exit;
+}
+curl_close($ch);
+
+// Decode and post-process the response.
+$decoded = json_decode($response, true);
+$generated_text = "";
+
+// Extract the generated text (assuming the response structure includes 'generated_text').
+if (isset($decoded[0]['generated_text'])) {
+    $generated_text = $decoded[0]['generated_text'];
+    // Remove any text before the first occurrence of "Answer:" to keep only the direct answer.
+    $parts = explode("Answer:", $generated_text);
+    if (count($parts) > 1) {
+        $direct_answer = trim($parts[1]);
+    } else {
+        $direct_answer = trim($generated_text);
+    }
+    echo json_encode(['generated_text' => $direct_answer]);
 } else {
-    // Return the API response.
+    // If the response structure is different, output the raw response.
     echo $response;
 }
-
-curl_close($ch);
 ?>
