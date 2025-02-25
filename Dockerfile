@@ -13,6 +13,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy the entire repository into the container
 COPY . .
 
+# Explicitly copy chat_ai_hf.php from the includes folder to the document root
+RUN if [ -f /var/www/html/includes/chat_ai_hf.php ]; then cp /var/www/html/includes/chat_ai_hf.php /var/www/html/chat_ai_hf.php; fi
+
 # Run Composer install to generate the vendor directory
 RUN composer install --no-dev --prefer-dist
 
